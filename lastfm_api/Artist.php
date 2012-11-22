@@ -146,7 +146,8 @@ class Artist extends Media {
 	 */
 	public static function getEvents($artist){
 		$xml = CallerFactory::getDefaultCaller()->call('artist.getEvents', array(
-			'artist' => $artist
+			'artist' => $artist,
+			'autocorrect' => 1
 		));
 
 		$events = array();

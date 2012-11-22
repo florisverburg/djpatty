@@ -24,11 +24,22 @@ if(DEBUG) {
     ini_set('error_reporting', 0);
 }
 
+
+require_once('SpotifyItem.class.php');
+require_once('MetaTune_Album.class.php');
+require_once('MetaTune_Artist.class.php');
+require_once('MetaTune_Track.class.php');
+require_once('MBSimpleXMLElement.class.php');
+require_once('MetaTune.class.php');
+require_once('MetaTuneException.class.php');
+
 // Added a magic function (autoload) to not have to import all the classes
 // if there no use for them.
-function __autoload($class) {
-    $filename = $class . '.class.php';
-    require_once $filename;
-}
+// function metatune_autoload($class) {
+//     $filename = $class . '.class.php';
+//     require_once $filename;
+// }
+
+//spl_autoload_register('metatune_autoload');
 // either you have this autoload-function or you must require/include all files.
 

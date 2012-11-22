@@ -27,7 +27,7 @@
  * @version 1.0.2
  * @package MetaTune
  */
-class Artist extends SpotifyItem {
+class MetaTune_Artist extends SpotifyItem {
 
     private $uri;
     private $name;
@@ -120,7 +120,7 @@ class Artist extends SpotifyItem {
      */
     public function equals(SpotifyItem $b) {
 
-        if(!($b instanceof Artist)) {
+        if(!($b instanceof MetaTune_Artist)) {
             return false;
         }
 

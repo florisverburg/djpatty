@@ -30,7 +30,7 @@
  * @version 1.0.2
  * @package MetaTune
  */
-class Track extends SpotifyItem {
+class MetaTune_Track extends SpotifyItem {
 
     private $uri;
     private $title;
@@ -51,7 +51,7 @@ class Track extends SpotifyItem {
      * @param float $popularity
      * @param int $trackNr
      */
-    public function __construct($uri, $title, $artist, Album $album, $length = 0, $popularity = 0, $trackNr = 0, $discNr = 0) {
+    public function __construct($uri, $title, $artist, MetaTune_Album $album, $length = 0, $popularity = 0, $trackNr = 0, $discNr = 0) {
         $this->uri = $uri;
         $this->title = $title;
         $this->artist = $artist;
@@ -206,7 +206,7 @@ class Track extends SpotifyItem {
      */
     public function equals(SpotifyItem $b) {
 
-        if(!($b instanceof Track)) {
+        if(!($b instanceof MetaTune_Track)) {
             return false;
         }
 

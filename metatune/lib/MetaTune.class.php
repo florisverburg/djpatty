@@ -113,15 +113,15 @@ class MetaTune {
             throw new MetaTuneException(1003);
         }
 
-        if ($input[0] instanceof Artist)
+        if ($input[0] instanceof MetaTune_Artist)
         {
             $xml = new MBSimpleXMLElement('<?xml version = "1.0" encoding = "UTF-8"?><artists></artists>');
         }
-        else if ($input[0] instanceof Track)
+        else if ($input[0] instanceof MetaTune_Track)
         {
             $xml = new MBSimpleXMLElement('<?xml version = "1.0" encoding = "UTF-8"?><tracks></tracks>');
         }
-        else if ($input[0] instanceof Album)
+        else if ($input[0] instanceof MetaTune_Album)
         {
             $xml = new MBSimpleXMLElement('<?xml version = "1.0" encoding = "UTF-8"?><albums></albums>');
         }
@@ -608,7 +608,7 @@ class MetaTune {
 
 
 
-        return new Artist((string) $artistId['href'], (string) $artist->name, (double) $artist->popularity, $albums);
+        return new MetaTune_Artist((string) $artistId['href'], (string) $artist->name, (double) $artist->popularity, $albums);
     }
 
     /**
@@ -645,7 +645,7 @@ class MetaTune {
         if (!isset($albumInput) || $albumInput == null)
         {
             $albumId = $track->album->attributes();
-            $album = new Album((string) $albumId['href'], (string) $track->album->name, (string) $track->album->released, $artistAlbum);
+            $album = new MetaTune_Album((string) $albumId['href'], (string) $track->album->name, (string) $track->album->released, $artistAlbum);
         }
         else
         {
@@ -653,7 +653,7 @@ class MetaTune {
         }
 
         $trackId = $track->attributes();
-        return new Track((string) $trackId['href'], (string) $track->name, $artists, $album, (double) $track->length, (double) $track->popularity, (int) $track->{"track-number"}, $cdnm);
+        return new MetaTune_Track((string) $trackId['href'], (string) $track->name, $artists, $album, (double) $track->length, (double) $track->popularity, (int) $track->{"track-number"}, $cdnm);
     }
 
     /**

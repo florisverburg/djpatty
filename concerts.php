@@ -8,7 +8,8 @@
 	</head>
 	<body>
 		<?php
-			require_once('metatune/lib/config.php');
+			require 'lastfm_api/lastfm.api.php';
+			require 'metatune/lib/config.php';
 
 			$spotify = MetaTune::getInstance();
 			if(isset($_REQUEST['q'])){
@@ -31,21 +32,17 @@
 				<tbody>
 					<?php
 						$LAST_FM_API_KEY = '764d5b2b6e44a878abcb9dba6d77d33f';
-						require "lastfm_api/lastfm.api.php";
-						echo "test";
 						CallerFactory::getDefaultCaller()->setApiKey($LAST_FM_API_KEY);
-
-						$events = Artist::getEvents("blof");
+						
+						$events = Artist::getEvents($query);
 						if(!empty($events)){
 							foreach ($events as $key => $event) {
-								?>
-								<tr>
-									<td><?php echo $event->getTitle(); ?></td>
-									<td><?php echo implode(",",$event->getArtists()); ?></td>
-									<td><?php echo date(DATE_RSS,$event->getStartDate()); ?></td>
-									<td><?php echo $event->getVenue()->getName(); ?></td>
-								</tr>
-							<?php
+								echo "<tr>";
+								echo "<td>" . $event->getTitle() . "</td>";
+								echo "<td>" . $event->getArtists()['headliner'] . "</td>";
+								echo "<td>" . date(DATE_RSS,$event->getStartDate()) . "</td>";
+								echo "<td>" . $event->getVenue()->getName() . "</td>";
+								echo "</tr>";
 							}
 						}
 					?>
