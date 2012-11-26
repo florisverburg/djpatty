@@ -1,24 +1,24 @@
+<?php
+	require 'lastfm_api/lastfm.api.php';
+	require 'metatune/lib/config.php';
+
+	$spotify = MetaTune::getInstance();
+	if(isset($_REQUEST['q'])){
+		$query = $_REQUEST['q'];
+	}
+	else {
+	}
+?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<title>Title Goes Here</title>
+		<title>Concerts by <?php echo $query; ?></title>
 		<link rel="stylesheet/less" type="text/css" href="less/djpatty.less" />
 
 	</head>
 	<body>
-		<?php
-			require 'lastfm_api/lastfm.api.php';
-			require 'metatune/lib/config.php';
-
-			$spotify = MetaTune::getInstance();
-			if(isset($_REQUEST['q'])){
-				$query = $_REQUEST['q'];
-			}
-			else {
-			}
-		?>
-
 		<div class="content">
 			<table class="table">
 				<thead>

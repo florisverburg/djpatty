@@ -1,3 +1,10 @@
+<?php
+	require_once('metatune/lib/config.php');
+	require_once('lastfm_api/lastfm.api.php');
+
+	$spotify = MetaTune::getInstance();
+?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 	<head>
@@ -7,17 +14,10 @@
 
 	</head>
 	<body>
-		<?php
-			require_once('metatune/lib/config.php');
-			require_once('lastfm_api/lastfm.api.php');
-
-			$spotify = MetaTune::getInstance();
-		?>
-
 		<div class="content">
 		</div>
 
-		
+
 		<!-- INCLUDE SCRIPTS -->
 		<script src="js/jquery.js" type="text/javascript"></script>
 		<script src="js/bootstrap.js" type="text/javascript"></script>
