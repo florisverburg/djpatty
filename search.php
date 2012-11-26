@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<title>Title Goes Here</title>
-		<link rel="stylesheet/less" type="text/css" href="less/bootstrap.less" />
+		<link rel="stylesheet/less" type="text/css" href="less/djpatty.less" />
 
 	</head>
 	<body>
