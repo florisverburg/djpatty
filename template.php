@@ -1,8 +1,11 @@
 <?php
 	require_once('metatune/lib/config.php');
 	require_once('lastfm_api/lastfm.api.php');
+	require_once('Database.class.php');
+	require_once('DBConfig.class.php');
 
 	$spotify = MetaTune::getInstance();
+	$db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,6 +18,12 @@
 	</head>
 	<body>
 		<div class="content">
+			<?php 
+				$users = $db->getUsers();
+				foreach($users as $user){
+					echo $user['email']." : ".$user['password']."<br />";
+				}
+			?>
 		</div>
 
 

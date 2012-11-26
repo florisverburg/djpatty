@@ -1,25 +1,25 @@
 <?php
 
 class DBConfig {
-	
-	private static $DB_HOST = "mysql03.totaalholding.nl";
-	private static $DB_USER = "sander2b_djpatty";
-	private static $DB_PASSWORD = "djpatty";
-	private static $DB_NAME = "sander2b_djpatty";
+
+	const HOST_NAME = "mysql03.totaalholding.nl";
+	const USER_NAME = "sander2b_djpatty";
+	const PASSWORD  = "djpatty";
+	const DB_NAME 	= "sander2b_djpatty";
 
 	public static function getHostName(){
-		return $DB_HOST;
+		return self::HOST_NAME;
 	}
 
-	public static function getHostName(){
-		return $DB_USER;
+	public static function getUser(){
+		return self::USER_NAME;
 	}
 
-	public static function getHostName(){
-		return $DB_PASSWORD;
+	public static function getPassword(){
+		return self::PASSWORD;
 	}
 
-	public static function getHostName(){
-		return $DB_NAME;
+	public static function getDatabaseName(){
+		return self::DB_NAME;
 	}
 }
