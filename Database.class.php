@@ -15,7 +15,7 @@ class Database {
 	 *	@return 	string[] 	Array containing the names of the artists similar to the given parameter
 	 */
 	public function getSimilarArtists($artist){
-		return true;
+		return 'one direction';
 	}
 
 	/**
@@ -25,7 +25,7 @@ class Database {
 	 *	@return 	integer 	The amount of times this artist has been played
 	 */
 	public function getArtistPlaycount($artist){
-
+		return 0;
 	}
 
 	public function getUsers(){
