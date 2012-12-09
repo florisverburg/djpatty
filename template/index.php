@@ -24,7 +24,7 @@
 						<div class="12u">
 						
 							<!-- Logo -->
-								<h1 class="mobileUI-site-name"><a href="#">Halcyonic</a></h1> 
+								<h1 class="mobileUI-site-name"><a href="#">djpatty</a></h1> 
 							
 							
 							<!-- Nav -->
@@ -45,8 +45,20 @@
 							<div class="6u">
 							
 								<!-- Banner Copy -->
-									<p>We do something really useful, important, and unique. Learn all about it here ...</p>
-									<a href="#" class="button-big">Go on, click me!</a>
+									<div id = "search" class="span12">
+										<form method = "get" action="search.php">
+											<fieldset>
+												<legend>
+													Search
+												</legend>
+											</fieldset>
+											<ul>
+												<li class="dropdown active">
+													<input type="text" placeholder="Search"></a>  
+												</li>
+											</ul>
+										</form>
+									</div>
 
 							</div>
 							<div class="6u">
