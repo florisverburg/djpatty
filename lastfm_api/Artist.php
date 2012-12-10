@@ -279,6 +279,21 @@ class Artist extends Media {
 		return $albums;
 	}
 
+	public static function getTopAlbumNames($artist){
+		$xml = CallerFactory::getDefaultCaller()->call('artist.getTopAlbums', array(
+			'artist' => $artist,
+			'autocorrect' => 1
+		));
+
+		$albums = array();
+
+		foreach($xml->children() as $album){
+			$albums[] = Album::fromSimpleXMLElement($album)->getName();
+		}
+
+		return $albums;
+	}
+
 	/** Get the top fans for an artist on last.fm, based on listening data.
 	 *
 	 * @param	string	$artist	The artist name in question. (Required)

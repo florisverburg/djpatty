@@ -136,7 +136,8 @@ class Album extends Media {
 			'artist' => $artist,
 			'album'  => $album,
 			'mbid'   => $mbid,
-			'lang'   => $lang
+			'lang'   => $lang,
+			'autocorrect' => 1
 		));
 
 		return Album::fromSimpleXMLElement($xml);

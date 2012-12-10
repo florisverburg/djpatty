@@ -11,6 +11,7 @@
 	$spotify = MetaTune::getInstance();
 	if(isset($_REQUEST['q'])){
 		$query = $_REQUEST['q'];
+		$page = $_REQUEST['page'];
 	}
 	else {
 	}
@@ -22,7 +23,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<noscript><link rel="stylesheet" href="css/5grid/core.css" /><link rel="stylesheet" href="css/5grid/core-desktop.css" /><link rel="stylesheet" href="css/5grid/core-1200px.css" /><link rel="stylesheet" href="css/5grid/core-noscript.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" /></noscript>
+		<noscript><link rel="stylesheet" href="css/djpatty.css" /><link rel="stylesheet" href="css/5grid/core.css" /><link rel="stylesheet" href="css/5grid/core-desktop.css" /><link rel="stylesheet" href="css/5grid/core-1200px.css" /><link rel="stylesheet" href="css/5grid/core-noscript.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" />
+			</noscript>
 		<script src="css/5grid/jquery.js"></script>
 		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarHeight=55&amp;mobileUI.openerWidth=75&amp;mobileUI.openerText=&lt;"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
@@ -36,11 +38,11 @@
 						<div class="12u">
 
 							<!-- Logo -->
-								<h1 class="mobileUI-site-name"><a href="#">djpatty</a></h1>
+								<h1 class="mobileUI-site-name"><a href="/">djpatty</a></h1>
 							
 							<!-- Nav -->
 								<nav class="mobileUI-site-nav">
-									<a href="index.php">Homepage</a>
+									<a href="index.php">Home</a>
 									<a href="threecolumn.html">Three Column</a>
 									<a href="twocolumn1.html">Two Column #1</a>
 									<a href="twocolumn2.html">Two Column #2</a>
@@ -78,8 +80,35 @@
 															echo "<td><a href='" . $artist->getURL() . "'>" . $artist->getName() . "</a></td>";
 															echo "</tr>";
 														}
+										<h2>Search results for '<?php echo $query; ?>'</h2>
+										<div class="artistresults">
+											<h3>Artists</h3>
+											<?php
+													$artists = $spotify->searchArtist($query);
+
+														if(count($artists)>0){
 											?>
-										</table>
+											<table>
+												<thead>
+													<tr>
+														<th>Artist</th>
+														<th>Score</th>
+											<?php	
+															foreach($artists as $artist){
+																if($artist->getPopularityAsPercent() > 0){
+																	echo "<tr>";
+																	echo "<td><a href='artist.php?uri=" . $artist->getURI() . "'>" . $artist->getName() . "</a></td>";
+																	echo "<td>".$artist->getPopularityAsPercent()."%</td>";
+																	echo "</tr>";
+																}
+															}	
+											?>
+											</table>
+											<?php
+														}
+														else echo "<p>No search results</p>";
+											?>
+										</div>
 
 										<?php
 											}
@@ -123,7 +152,40 @@
 												?>
 											</tbody>
 										</table>
+										<div class="trackresults">
+											<h3>Tracks</h3>
+											<?php
+												$tracks = $spotify->searchTrack($query, $page);
 
+												if(count($tracks)>0){
+											?>
+											<table>
+												<thead>
+													<tr>
+														<th>Title</th>
+														<th>Artist</th>
+														<th>Album</th>
+														<th>Duration</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+															foreach($tracks as $track){
+																$artist = $track->getArtist();
+																echo "<tr>";
+																echo "<td><a href='" . $track->getURL() . "'>" . $track->getTitle() . "</a></td>";
+																echo "<td><a href='" . ((is_array($artist)) ? $artist[0]->getURL() : $artist->getURL()) . "'>" . $track->getArtistAsString() . "</a></td>";
+																echo "<td><a href='" . $track->getAlbum()->getURL() . "'>" . $track->getAlbum() . "</a></td>";
+																echo "<td>" . $track->getLengthInMinutesAsString() . "</td>";
+																echo "</tr>";
+															}
+														}
+														else echo "<td colspan='4'>No search results</td>";
+														
+													?>
+												</tbody>
+											</table>
+										</div>
 										<?php
 											}
 											else echo "No search results";

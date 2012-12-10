@@ -128,6 +128,9 @@ class MetaTune_Album extends SpotifyItem {
         $this->artist = $artist;
     }
 
+    public function getRelease(){
+        return $this->release;
+    }
     /**
      * Get a float representation of the popularity.
      * Example: 0.92

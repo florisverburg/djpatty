@@ -291,3 +291,79 @@
 		background-image: -o-linear-gradient(top, #ce1a00, #ed391b);
 		background-image: linear-gradient(top, #ce1a00, #ed391b);
 	}
+
+/* DJ PATTY */
+
+.trackresults {
+	margin-bottom: 10px;
+	width: auto;
+}
+
+.artistresults {
+	margin-bottom: 10px;
+	width: auto;
+}
+
+table {
+	width: 100%;
+}
+
+table tr th {
+	background-color: #474f51;
+	color: #fff;
+}
+
+table tr:nth-child(2n){
+	background-color: #eee;
+}
+
+table tr td {
+	padding: 5px 15px 0px 5px;
+}
+
+table tr th {
+	padding: 5px 15px 0px 5px;
+}
+
+table tr:hover{
+	background-color: #ED391B;
+	color: #fff !important;
+}
+
+table tr:hover td a {
+	color: #fff !important;
+}
+
+.album {
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.album .albumArt {
+	float:left;
+	margin-right: 5px;
+	width: 174px;
+}
+
+.album .albumArt img {
+	max-width: 174px;
+	max-height: 174px;
+}
+
+.album .tracklist {
+	overflow: hidden;
+}
+
+.album table tr th.duration {
+	width: 50px;
+}
+
+.album table tr th.tracknumber {
+	width: 20px;
+}
+
+.album table tr td:nth-child(3n){
+	text-align: right;
+}
+
+

@@ -53,7 +53,7 @@
  */
 class MetaTune {
     const CACHE_DIR = 'lib/cache/'; // Cache directory (must be writable)
-    const USE_CACHE = true; // Should caching be activated?
+    const USE_CACHE = false; // Should caching be activated?
     const CACHE_PREFIX = "METATUNE_CACHE_"; // prefix for cache-files. 
 
     const SERVICE_BASE_URL_SEARCH = "http://ws.spotify.com/search/1/";
@@ -618,7 +618,7 @@ class MetaTune {
      * @param Album $albumInput
      * @return Track
      */
-    private function extractTrackInfo(SimpleXMLElement $track, Album $albumInput = null)
+    private function extractTrackInfo(SimpleXMLElement $track, MetaTune_Album $albumInput = null)
     {
         $artists = array();
         foreach ($track->artist as $artistl)
@@ -679,7 +679,7 @@ class MetaTune {
             $albumURI = $id;
         }
 
-        $currentAlbum = new Album($albumURI, (string) $album->name, (string) $album->released, $artist, (double) $album->popularity);
+        $currentAlbum = new Metatune_Album($albumURI, (string) $album->name, (string) $album->released, $artist, (double) $album->popularity);
 
         $tracks = array();
         if (isset($album->tracks->track))
