@@ -61,28 +61,43 @@
 							
 								<!-- Main Content -->
 									<section>
-										<h2>Artists</h2>
+										<header>
+											<h2>Artists</h2>
+										</header>
+
+										<?php
+											$artists = $spotify->searchArtist($query);
+
+											if(count($artists)>0){
+										?>
+
 										<table class="table">
 											<?php
-												$artists = $spotify->searchArtist($query);
-
-													if(count($artists)>0){
 														foreach($artists as $artist){
 															echo "<tr>";
 															echo "<td><a href='" . $artist->getURL() . "'>" . $artist->getName() . "</a></td>";
 															echo "</tr>";
 														}
-													}
-													else echo "<td colspan='4'>No search results</td>";
 											?>
 										</table>
 
-										<h2>Tracks</h2>
+										<?php
+											}
+											else echo "No search results";
+										?>
+
+										<br />
+
+										<header>
+											<h2>Tracks</h2>
+										</header>
+
 										<?php
 											$tracks = $spotify->searchTrack($query);
 
 											if(count($tracks)>0){
 										?>
+
 										<table class="table">
 											<thead>
 												<tr>
@@ -94,6 +109,7 @@
 											</thead>
 											<tbody>
 												<?php
+													
 														foreach($tracks as $track){
 															$artist = $track->getArtist();
 															echo "<tr>";
@@ -103,12 +119,15 @@
 															echo "<td>" . $track->getLengthInMinutesAsString() . "</td>";
 															echo "</tr>";
 														}
-													}
-													else echo "<td colspan='4'>No search results</td>";
 													
 												?>
 											</tbody>
 										</table>
+
+										<?php
+											}
+											else echo "No search results";
+										?>
 
 									</section>
 
