@@ -119,7 +119,7 @@
 																$artist = $track->getArtist();
 																echo "<tr>";
 																echo "<td><a href='" . $track->getURL() . "'>" . $track->getTitle() . "</a></td>";
-																echo "<td><a href='" . ((is_array($artist)) ? $artist[0]->getURL() : $artist->getURL()) . "'>" . $track->getArtistAsString() . "</a></td>";
+																echo "<td><a href='artist.php?uri=" . ((is_array($artist)) ? $artist[0]->getURI() : $artist->getURI()) . "'>" . $track->getArtistAsString() . "</a></td>";
 																echo "<td><a href='" . $track->getAlbum()->getURL() . "'>" . $track->getAlbum() . "</a></td>";
 																echo "<td>" . $track->getLengthInMinutesAsString() . "</td>";
 																echo "</tr>";

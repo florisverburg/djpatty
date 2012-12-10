@@ -148,7 +148,7 @@
 											<?php 
 												$events = Artist::getEvents($lastfmArtist->getName());
 												if(sizeof($events)>0){
-													for($i = 0; $i < 5; $i++){
+													for($i = 0; $i < min(sizeof($events),5); $i++){
 														echo "<li><a href='".$events[$i]->getUrl()."'>".date("F j, Y",$events[$i]->getStartDate())." at ".$events[$i]->getVenue()->getName()."</a></li>";
 													}
 												}
