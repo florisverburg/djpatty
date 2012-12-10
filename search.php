@@ -125,7 +125,7 @@
 																echo "</tr>";
 															}
 														}
-														else echo "<td colspan='4'>No search results</td>";
+														else echo "<p>No search results</p>";
 														
 													?>
 												</tbody>
