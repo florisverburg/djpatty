@@ -63,24 +63,9 @@
 							
 								<!-- Main Content -->
 									<section>
-										<header>
-											<h2>Artists</h2>
-										</header>
-
-										<?php
-											$artists = $spotify->searchArtist($query);
-
-											if(count($artists)>0){
-										?>
-
-										<table class="table">
-											<?php
-														foreach($artists as $artist){
-															echo "<tr>";
-															echo "<td><a href='" . $artist->getURL() . "'>" . $artist->getName() . "</a></td>";
-															echo "</tr>";
-														}
+										
 										<h2>Search results for '<?php echo $query; ?>'</h2>
+										<br />
 										<div class="artistresults">
 											<h3>Artists</h3>
 											<?php
@@ -110,48 +95,8 @@
 											?>
 										</div>
 
-										<?php
-											}
-											else echo "No search results";
-										?>
-
 										<br />
 
-										<header>
-											<h2>Tracks</h2>
-										</header>
-
-										<?php
-											$tracks = $spotify->searchTrack($query);
-
-											if(count($tracks)>0){
-										?>
-
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Title</th>
-													<th>Artist</th>
-													<th>Album</th>
-													<th>Duration</th>
-												</tr>
-											</thead>
-											<tbody>
-												<?php
-													
-														foreach($tracks as $track){
-															$artist = $track->getArtist();
-															echo "<tr>";
-															echo "<td><a href='" . $track->getURL() . "'>" . $track->getTitle() . "</a></td>";
-															echo "<td><a href='" . ((is_array($artist)) ? $artist[0]->getURL() : $artist->getURL()) . "'>" . $track->getArtistAsString() . "</a></td>";
-															echo "<td><a href='" . $track->getAlbum()->getURL() . "'>" . $track->getAlbum() . "</a></td>";
-															echo "<td>" . $track->getLengthInMinutesAsString() . "</td>";
-															echo "</tr>";
-														}
-													
-												?>
-											</tbody>
-										</table>
 										<div class="trackresults">
 											<h3>Tracks</h3>
 											<?php
@@ -186,10 +131,6 @@
 												</tbody>
 											</table>
 										</div>
-										<?php
-											}
-											else echo "No search results";
-										?>
 
 									</section>
 
