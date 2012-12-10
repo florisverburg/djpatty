@@ -6,7 +6,7 @@
 -->
 
 <?php
-	require_once('../metatune/lib/config.php');
+	require_once('metatune/lib/config.php');
 
 	$spotify = MetaTune::getInstance();
 	if(isset($_REQUEST['q'])){
