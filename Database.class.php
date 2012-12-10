@@ -22,7 +22,7 @@ class Database {
 	 */
 	public function getSimilarArtists($artist){
 		$genres = Artist::getTags($artist);
-		$query = "SELECT * FROM dataset WHERE artist = '".strtolower($artist)."' ORDER BY numberofplays";
+		$query = "SELECT * FROM dataset WHERE artist = '".strtolower($artist)."' ORDER BY totalplays";
 		$result = mysql_query($query);
 
 		$userArray = array();
@@ -33,7 +33,7 @@ class Database {
 		$similarArtists = array();
 
 		foreach($userArray as $user){
-			$query = "SELECT artist FROM dataset WHERE userid = '".$user['userid']."' ORDER BY numberofplays LIMIT 5";
+			$query = "SELECT artist FROM dataset WHERE userid = '".$user['userid']."' ORDER BY totalplays LIMIT 5";
 			$result = mysql_query($query);
 			while($row = mysql_fetch_array($result)){
 				if(!in_array($row['artist'], $similarArtists))
