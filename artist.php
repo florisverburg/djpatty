@@ -75,13 +75,15 @@
 											$duplicateAlbums = array();
 											$lastfmdata = Artist::getTopAlbumNames($artist->getName());
 											$albums = $artist->getAlbum();
-											foreach ($albums as $album) {
-												if(in_array($album->getName(), $lastfmdata) && !in_array($album->getName(), $duplicateAlbums)){
-													$duplicateAlbums[] = $album->getName();
-													$lastfmAlbum = Album::getInfo($artist->getName(),$album->getName());
+
+											// For testing purposes we limit the amount of albums, to speed things up. 
+											for($i = 0; $i < 5; $i++){
+												if(in_array($albums[$i]->getName(), $lastfmdata) && !in_array($albums[$i]->getName(), $duplicateAlbums)){
+													$duplicateAlbums[] = $albums[$i]->getName();
+													$lastfmAlbum = Album::getInfo($artist->getName(),$albums[$i]->getName());
 										?>
 										<div class="album">
-											<h3><?php echo $album->getName()." (".$album->getRelease().")"; ?></h3>
+											<h3><?php echo $albums[$i]->getName()." (".$albums[$i]->getRelease().")"; ?></h3>
 											<div class="albumArt">
 												<img src="<?php echo $lastfmAlbum->getImage(Media::IMAGE_LARGE); ?>" />
 											</div>
@@ -96,7 +98,7 @@
 													</thead>
 													<tbody>
 											<?php
-														$spotifyAlbum = $spotify->lookupAlbum($album->getURI(),true);
+														$spotifyAlbum = $spotify->lookupAlbum($albums[$i]->getURI(),true);
 														$tracks = $spotifyAlbum->getTracks();
 														$i = 1;
 														foreach($tracks as $track){
@@ -137,18 +139,25 @@
 									</section>
 									<section>
 										<header>
-											<h2>Ipsum Dolor</h2>
+											<h2>Upcoming events</h2>
+											<p>
+												See where <?php echo $artist->getName(); ?> is playing.					
+											</p>
 										</header>
-										<p>
-											Vehicula fermentum ligula at pretium. Suspendisse semper iaculis eros, eu aliquam 
-											iaculis. Phasellus ultrices diam sit amet orci lacinia sed consequat. 							
-										</p>
-										<ul class="link-list">
-											<li><a href="#">Sed dolore viverra</a></li>
-											<li><a href="#">Ligula non varius</a></li>
-											<li><a href="#">Dis parturient montes</a></li>
-											<li><a href="#">Nascetur ridiculus</a></li>
+										<ul class="link-list events">
+											<?php 
+												$events = Artist::getEvents($lastfmArtist->getName());
+												if(sizeof($events)>0){
+													for($i = 0; $i < 5; $i++){
+														echo "<li><a href='".$events[$i]->getUrl()."'>".date("F j, Y",$events[$i]->getStartDate())." at ".$events[$i]->getVenue()->getName()."</a></li>";
+													}
+												}
+
+												else echo "<li>No upcoming events found!</li>";
+											?>
 										</ul>
+
+										<?php if(sizeof($events)>0) echo "<a href='events.php?artist=".$artist->getURI()."'>See more</a>"; ?>
 									</section>
 
 							</div>

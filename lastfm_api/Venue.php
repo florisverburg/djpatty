@@ -39,7 +39,7 @@ class Venue {
 	public function __construct($name, Location $location, $url){
 		$this->name     = $name;
 		$this->location = $location;
-		$thus->url      = $url;
+		$this->url      = $url;
 	}
 
 	/** Returns the venues name.
