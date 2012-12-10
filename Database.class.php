@@ -21,8 +21,11 @@ class Database {
 	 *	@return 	string[] 	Array containing the names of the artists similar to the given parameter
 	 */
 	public function getSimilarArtists($artist){
-		$genres = Artist::getTags($artist);
-		$query = "SELECT * FROM dataset WHERE artist = '".strtolower($artist)."' ORDER BY totalplays";
+		$key = CallerFactory::getDefaultCaller()->getApiKey();
+		$genres = Artist::getTopTags($artist, $key);
+		$genre = $genres[0]->getName();
+		echo $genre ." <br><br>";
+		$query = "SELECT * FROM dataset WHERE artist = '".strtolower($artist)."' ORDER BY totalplays LIMIT 1000";
 		$result = mysql_query($query);
 
 		$userArray = array();
@@ -36,17 +39,22 @@ class Database {
 			$query = "SELECT artist FROM dataset WHERE userid = '".$user['userid']."' ORDER BY totalplays LIMIT 5";
 			$result = mysql_query($query);
 			while($row = mysql_fetch_array($result)){
-				if(!in_array($row['artist'], $similarArtists))
-					$tags = Artist::getTags($row['artist']);
-					$similar = false;
-					foreach($tags as $tag){
-						if(in_array($tag->getName(), $genres)){
-							$similar = true;
-							break;
+				if (strpos($row['artist'], '?') === false){
+					if(!in_array($row['artist'], $similarArtists)){
+						$tags = Artist::getTopTags($row['artist'],$key);
+						$similar = false;
+						foreach($tags as $tag){
+							if($tag->getName() == $genre){
+								$similar = true;
+								break;
+							}
 						}
+						if($similar){
+							$similarArtists[] = $row['artist'];
+							echo $row['artist'] . "<br>";
+						}	
 					}
-					if($similar)
-						$similarArtists[] = $row['artist'];
+				}
 			}
 		}
 
