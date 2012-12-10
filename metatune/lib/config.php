@@ -7,7 +7,7 @@ header("Content-Type: text/html; charset=UTF-8");
 /**
  * Global settings - Individual config. Just nice to have in a config file.
  */
-define("DEBUG", false);
+define("DEBUG", true);
 
 if(DEBUG) {
     // set debug settings

@@ -242,7 +242,8 @@ class Artist extends Media {
 	 */
 	public static function getTags($artist, Session $session){
 		$xml = CallerFactory::getDefaultCaller()->signedCall('artist.getTags', array(
-			'artist' => $artist
+			'artist' => $artist,
+			'autocorrect' => 1
 		), $session);
 
 		$tags = array();
