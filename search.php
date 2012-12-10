@@ -136,6 +136,7 @@
 											<?php
 												if($page > 1){
 													$page2 = $page - 1;
+													$query = str_replace(" ", "+", $query);
 													echo "<li><a href=search.php?page=".$page2."&q=".$query.">previous</a></li>";
 												}
 												else{
@@ -146,6 +147,7 @@
 											<?php
 												if($page < $spotify->getNumberOfPages($query)){
 													$page2 = $page + 1;
+													$query = str_replace(" ", "+", $query);
 													echo "<li><a href=search.php?page=".$page2."&q=".$query.">next</a></li>";
 												}
 											?>
