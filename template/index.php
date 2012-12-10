@@ -54,7 +54,7 @@
 											</fieldset>
 											<ul>
 												<li class="dropdown active">
-													<input type="text" placeholder="Search"></a>  
+													<input type="text" placeholder="Search" name="q"></a>  
 												</li>
 											</ul>
 										</form>
