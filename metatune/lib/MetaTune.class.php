@@ -237,6 +237,15 @@ class MetaTune {
         return "&page=" . (int) $page;
     }
 
+    public function getNumberOfPages($name, $page = 1)
+    {
+        $url = self::SERVICE_BASE_URL_SEARCH . "track?q=" . $this->translateString($name) . $this->addPageSuffix($page);
+        $contents = file_get_contents($url);
+        $xml = new SimpleXMLElement($contents);
+
+        return ceil($xml->children('opensearch',true)->totalResults/100);
+    }
+
     /**
      * Search for a spesific track.
      *

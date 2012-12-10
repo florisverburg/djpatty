@@ -132,6 +132,25 @@
 											</table>
 										</div>
 
+										<ul id="pagin">
+											<?php
+												if($page > 1){
+													$page2 = $page - 1;
+													echo "<li><a href=search.php?page=".$page2."&q=".$query.">previous</a></li>";
+												}
+												else{
+													echo "<li><a id='hidden'>previous</a></li>";
+												}
+											?>
+											<li><a class="current" ><?php echo $page; ?></a></li>
+											<?php
+												if($page < $spotify->getNumberOfPages($query)){
+													$page2 = $page + 1;
+													echo "<li><a href=search.php?page=".$page2."&q=".$query.">next</a></li>";
+												}
+											?>
+										</ul>
+
 									</section>
 
 							</div>
