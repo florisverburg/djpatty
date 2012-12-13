@@ -16,6 +16,7 @@
 		$uri = $_REQUEST['uri'];
 		$artist = $spotify->lookupArtist($uri,true);
 		$lastfmArtist = Artist::getInfo($artist);
+		$artistpop = $spotify->searchArtist($artist->getName())[0];
 	}
 	else {
 	}
@@ -69,7 +70,7 @@
 									<section>
 										<header>
 											<h2><?php echo $artist->getName(); ?></h2>
-											<h3>Spotify score: <?php echo $artist->getPopularityAsPercent()."%"; ?></h3>
+											<h3>Spotify score: <?php echo $artistpop->getPopularityAsPercent()."%"; ?></h3>
 											<p class="bio"><?php echo $lastfmArtist->getBiography(); ?></p>
 										</header>
 

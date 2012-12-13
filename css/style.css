@@ -467,6 +467,12 @@ table tr:hover td a {
 	margin-left: 45px;
 }
 
+.description:hover{
+	background-color: #fff !important;
+	color: #474f51 !important;
+}
+
+
 section {
 	overflow: hidden;
 }
