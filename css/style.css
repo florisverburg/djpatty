@@ -460,5 +460,14 @@ table tr:hover td a {
 	visibility: hidden;
 }
 
+.spotifybutton {
+	width:80px; 
+	height:80px;
+	margin-top: 45px;
+	margin-left: 45px;
+}
 
+section {
+	overflow: hidden;
+}
 

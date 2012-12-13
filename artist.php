@@ -30,6 +30,7 @@
 		<noscript><link rel="stylesheet" href="css/5grid/core.css" /><link rel="stylesheet" href="css/5grid/core-desktop.css" /><link rel="stylesheet" href="css/5grid/core-1200px.css" /><link rel="stylesheet" href="css/5grid/core-noscript.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" /></noscript>
 		<script src="css/5grid/jquery.js"></script>
 		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarHeight=55&amp;mobileUI.openerWidth=75&amp;mobileUI.openerText=&lt;"></script>
+		<script src="js/djpatty.js"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 	</head>
 	<body class="subpage">
@@ -71,6 +72,7 @@
 											<h3>Spotify score: <?php echo $artist->getPopularityAsPercent()."%"; ?></h3>
 											<p class="bio"><?php echo $lastfmArtist->getBiography(); ?></p>
 										</header>
+
 										<?php
 											$duplicateAlbums = array();
 											$lastfmdata = Artist::getTopAlbumNames($artist->getName());
@@ -84,7 +86,7 @@
 										?>
 										<div class="album">
 											<h3><?php echo $albums[$i]->getName()." (".$albums[$i]->getRelease().")"; ?></h3>
-											<div class="albumArt">
+											<div class="albumArt" id="<?php echo $albums[$i]->getURI(); ?>">
 												<img src="<?php echo $lastfmAlbum->getImage(Media::IMAGE_LARGE); ?>" />
 											</div>
 											<div class="tracklist">
@@ -102,7 +104,7 @@
 														$tracks = $spotifyAlbum->getTracks();
 														$i = 1;
 														foreach($tracks as $track){
-															echo "<tr>";
+															echo "<tr class='track' data-original-title='test' data-album='".$track->getAlbum()->getURI()."' id='".$track->getURI()."''>";
 															echo "<td>".$i."</td>";
 															echo "<td>".$track->getTitle()."</td>";
 															echo "<td>".$track->getLengthInMinutesAsString()."</td>";
@@ -117,7 +119,7 @@
 												}
 											}
 										?>
-										
+										<div class="album"></div>
 									</section>
 
 							</div>
