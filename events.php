@@ -52,7 +52,7 @@
 						<div class="12u">
 
 							<!-- Logo -->
-								<h1 class="mobileUI-site-name"><a href="/">Halcyonic</a></h1>
+								<h1 class="mobileUI-site-name"><a href="/">djpatty</a></h1>
 							
 							<!-- Nav -->
 								<nav class="mobileUI-site-nav">
@@ -90,24 +90,33 @@
 														<th>Location</th>
 														<th>Date</th>
 														<th>Time</th>
-											<?php	
+											<?php		
+														$col = 1;
 														foreach($events as $event){
 															$venue = $event->getVenue();
 															$location = $venue->getLocation();
-															echo "<tr id='".$event->getId()."' class='eventheader'>";
+															$class = "backcol1";
+															$class2 = "col1";
+															if($col%2 == 0){
+																$class = "backcol2";
+																$class2 = "col2";
+															}
+															echo "<tr id='".$event->getId()."' class='eventheader ".$class."' >";
 															echo "<td>".$event->getTitle()."</td>";
 															echo "<td>".$venue->getName().", ".$location->getCity().", ".$location->getCountry()."</td>";
-															echo "<td>".date("d-m-Y H:i",$event->getStartDate())."</td>";
+															echo "<td>".date("d-m-Y",$event->getStartDate())."</td>";
 															echo "<td>".date("H:i",$event->getStartDate())."</td>";
 															echo "</tr>";
-															echo "<tr id='d".$event->getId()."' class='description'>";
+															echo "<tr id='d".$event->getId()."' class='description ".$class." ".$class2."'>";
+																$image = $event->getImage(2);
 																if($event->getDescription()!=null){
-																	echo "<td colspan='4'><h3>Description</h3>".$event->getDescription()."</td>";
+																	echo "<td colspan='4'>"."<img class='descriptionimage' src='".$image."'>"."<h3>Description</h3>".$event->getDescription()."</td>";
 																}
 																else{
-																	echo "<td colspan='4'>No description available</td>";
+																	echo "<td colspan='4'>"."<img class='descriptionimage' src='".$image."'>"."No description available</td>";
 																}
 															echo "</tr>";
+															$col++;
 														}	
 											?>
 										</table>
@@ -135,15 +144,19 @@
 										<header>
 											<h2>Artist Info</h2>
 										</header>
-										<p>
-											<?php echo $artistpop->getPopularityAsPercent()."%"; ?> 							
-										</p>
 										<ul class="link-list">
-											<li><a href="#">Sed dolore viverra</a></li>
-											<li><a href="#">Ligula non varius</a></li>
+											<li><label class="eventinfo">Name:</label> <?php echo $artist->getName() ?></li>
+											<li><label class="eventinfo">Spotify score:</label> <?php echo $artistpop->getPopularityAsPercent() ?>%</li>
+											<?php
+												$members = $lastfmArtist->getBandmembers();
+												if($members != null){
+													echo "<li><label class='eventinfo'>Bandmembers: </label>".implode(', ',$members).".</li>";
+												}
+											?>
 											<li><a href="#">Dis parturient montes</a></li>
 											<li><a href="#">Nascetur ridiculus</a></li>
 										</ul>
+										<?php echo "<a href='artist.php?uri=".$artist->getURI()."'>See more</a>"; ?>
 									</section>
 
 							</div>

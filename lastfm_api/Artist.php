@@ -14,6 +14,10 @@ class Artist extends Media {
 	 */
 	private $streamable;
 
+	private $mbid;
+
+	private $apikey = "764d5b2b6e44a878abcb9dba6d77d33f";
+
 	/** Similar artists.
 	 *
 	 * @var		array
@@ -68,6 +72,8 @@ class Artist extends Media {
 		$this->similar    = $similar;
 		$this->biography  = $biography;
 		$this->match      = $match;
+		$this->mbid 	  = $mbid;
+		$this->name 	  = $name;
 	}
 
 	/** Returns if this artists is streamable.
@@ -78,6 +84,29 @@ class Artist extends Media {
 	public function isStreamable(){
 		return $this->streamable;
 	}
+
+	public function getBandmembers(){
+		if($this->mbid == null){
+			$url = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=".$this->name."&api_key=".$this->apikey;
+		}
+		else{
+        	$url =  "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid=".$this->mbid."&api_key=".$this->apikey;
+        }
+        $contents = file_get_contents($url);
+        $xml = new SimpleXMLElement($contents);
+
+        if(!$xml->artist->bandmembers){
+        	return null;
+        }
+        else{
+			$members = array();
+	        foreach($xml->artist->bandmembers->member as $member)
+		    {
+		    	$members[] = $member->name;
+		  	}
+			return $members;
+		}
+    }
 
 	/** Returns similar artists.
 	 *

@@ -467,13 +467,48 @@ table tr:hover td a {
 	margin-left: 45px;
 }
 
-.description:hover{
+.backcol1{
+	background-color: #eee;
+}
+
+.backcol2{
+	background-color: #fff !important;
+}
+
+.col1:hover{
+	background-color: #eee !important;
+	color: #474f51 !important;
+}
+
+.col2:hover{
 	background-color: #fff !important;
 	color: #474f51 !important;
 }
 
+.description a:hover{
+	color: #ED391B !important;
+	text-decoration: none;
+}
+
+.eventheader:hover{
+	background-color: #ED391B !important;
+	color: #fff !important;
+}
+
+.description:hover a{
+	color: #ED391B !important;
+}
 
 section {
 	overflow: hidden;
+}
+
+.descriptionimage{
+	float: left;
+	margin: 3px;
+}
+
+.eventinfo{
+	font-weight: bold;
 }
 
