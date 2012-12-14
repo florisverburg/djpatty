@@ -108,6 +108,25 @@ class Artist extends Media {
 		}
     }
 
+    public function getLargeImage(){
+    	if($this->mbid == null){
+			$url = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=".$this->name."&api_key=".$this->apikey;
+		}
+		else{
+        	$url =  "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&mbid=".$this->mbid."&api_key=".$this->apikey;
+        }
+        $contents = file_get_contents($url);
+        $xml = new SimpleXMLElement($contents);
+
+        foreach($xml->artist->children() as $node){
+        	$arr = $node->attributes();
+        	if($arr['size'] == "large"){
+        		return $node;
+        	}
+        }
+        return null;
+    }
+
 	/** Returns similar artists.
 	 *
 	 * @return	array	An array of similar artists.

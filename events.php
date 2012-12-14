@@ -109,12 +109,15 @@
 															echo "</tr>";
 															echo "<tr id='d".$event->getId()."' class='description ".$class." ".$class2."'>";
 																$image = $event->getImage(2);
+																echo "<td colspan='4'>"."<img class='descriptionimage' src='".$image."'>";
 																if($event->getDescription()!=null){
-																	echo "<td colspan='4'>"."<img class='descriptionimage' src='".$image."'>"."<h3>Description</h3>".$event->getDescription()."</td>";
+																	echo "<h3>Description</h3>".$event->getDescription();
 																}
 																else{
-																	echo "<td colspan='4'>"."<img class='descriptionimage' src='".$image."'>"."No description available</td>";
+																	echo "No description available";
 																}
+																echo "<p><a href='".$event->getUrl()."' target='_blank'>Event on last.fm</a></p>";
+																echo "</td>";
 															echo "</tr>";
 															$col++;
 														}	
@@ -144,6 +147,12 @@
 										<header>
 											<h2>Artist Info</h2>
 										</header>
+										<?php
+											$image = $lastfmArtist->getLargeImage();
+											if($image){
+												echo "<img src='".$image."'>";
+											}
+										?>
 										<ul class="link-list">
 											<li><label class="eventinfo">Name:</label> <?php echo $artist->getName() ?></li>
 											<li><label class="eventinfo">Spotify score:</label> <?php echo $artistpop->getPopularityAsPercent() ?>%</li>
@@ -153,8 +162,6 @@
 													echo "<li><label class='eventinfo'>Bandmembers: </label>".implode(', ',$members).".</li>";
 												}
 											?>
-											<li><a href="#">Dis parturient montes</a></li>
-											<li><a href="#">Nascetur ridiculus</a></li>
 										</ul>
 										<?php echo "<a href='artist.php?uri=".$artist->getURI()."'>See more</a>"; ?>
 									</section>
