@@ -465,6 +465,11 @@ table tr:hover td a {
 	height:80px;
 	margin-top: 45px;
 	margin-left: 45px;
+	-moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    -ms-transform: scale(2);
 }
 
 .backcol1{
