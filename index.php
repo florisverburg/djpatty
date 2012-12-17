@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Halcyonic: A Responsive HTML5 Site Template by HTML5 Up! (Homepage)</title>
+		<title>Beaten by djpatty&trade;</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
