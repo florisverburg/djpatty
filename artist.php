@@ -85,11 +85,12 @@
 												if(in_array($album->getName(), $lastfmdata) && !in_array($album->getName(), $duplicateAlbums)){
 													$duplicateAlbums[] = $album->getName();
 										?>
-										<div class="album" id='<?php echo $album->getURI(); ?>' data-name='<?php echo $album->getName(); ?>'></div>
+													<div class="album" id='<?php echo $album->getURI(); ?>' data-name='<?php echo $album->getName(); ?>'></div>
 										<?php
 												}
 											}
 										?>
+										<div id="loading"><img src="images/loading.gif" /></div>
 									</section>
 
 							</div>

@@ -3,6 +3,7 @@ jQuery(document).ready(function(){
     var requestCallback = new MyRequestsCompleted({
         numRequest: jQuery('.album').length,
         singleCallback: function(){
+            jQuery('#loading').remove();
             addScrollingImages();
             addClickListener();
         }
