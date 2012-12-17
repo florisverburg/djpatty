@@ -511,6 +511,11 @@ section {
 .descriptionimage{
 	float: left;
 	margin: 3px;
+	margin-right: 10px;
+}
+
+.descriptiontext{
+	overflow: hidden;
 }
 
 .eventinfo{

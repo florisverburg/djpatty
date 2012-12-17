@@ -142,9 +142,11 @@
 												else{
 													echo "<li><a id='hidden'>previous</a></li>";
 												}
+												if($spotify->getNumberOfPages($query) > 1){
 											?>
 											<li><a class="current" ><?php echo $page; ?></a></li>
 											<?php
+												}
 												if($page < $spotify->getNumberOfPages($query)){
 													$page2 = $page + 1;
 													$query = str_replace(" ", "+", $query);

@@ -109,7 +109,7 @@
 															echo "</tr>";
 															echo "<tr id='d".$event->getId()."' class='description ".$class." ".$class2."'>";
 																$image = $event->getImage(2);
-																echo "<td colspan='4'>"."<img class='descriptionimage' src='".$image."'>";
+																echo "<td colspan='4'>"."<div class='descriptionimage'><img src='".$image."'></div><div class='descriptiontext'>";
 																if($event->getDescription()!=null){
 																	echo "<h3>Description</h3>".$event->getDescription();
 																}
@@ -117,7 +117,7 @@
 																	echo "No description available";
 																}
 																echo "<p><a href='".$event->getUrl()."' target='_blank'>Event on last.fm</a></p>";
-																echo "</td>";
+																echo "</div></td>";
 															echo "</tr>";
 															$col++;
 														}	
