@@ -1,14 +1,16 @@
-window.onload = function(){
+$(document).ready(function(){
 
-	$('.album').each(function(){
-		if($(this).next().offset() !== undefined)
-			$(this).children('.albumArt').scrollToFixed({marginTop: $(this).children('h3').height(), limit: $(this).next().offset().top - $(this).height() - 10 } );
-	})
+	for (var i = 0; i < $('.albumArt').length; i++) {
+        $($('.albumArt')[i]).scrollToFixed({
+                marginTop: 10,
+                limit: $($('.album')[i+1]).offset().top - $($('.albumArt')[i]).height() - 10
+        });
+    }
 
 	$('.track').click(function(){
 		setSpotifyPlayer($(this).attr('data-album'),$(this).attr('id'));
 	})
-}
+})
 
 function setSpotifyPlayer(divId, trackId){
 	document.getElementById(divId).innerHTML = '<iframe class="spotifybutton" src="https://embed.spotify.com/?uri=' + trackId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';

@@ -80,14 +80,14 @@
 											$albums = $artist->getAlbum();
 
 											// For testing purposes we limit the amount of albums, to speed things up. 
-											for($i = 0; $i < 5; $i++){
-												if(in_array($albums[$i]->getName(), $lastfmdata) && !in_array($albums[$i]->getName(), $duplicateAlbums)){
-													$duplicateAlbums[] = $albums[$i]->getName();
-													$lastfmAlbum = Album::getInfo($artist->getName(),$albums[$i]->getName());
+											foreach($albums as $album){
+												if(in_array($album->getName(), $lastfmdata) && !in_array($album->getName(), $duplicateAlbums)){
+													$duplicateAlbums[] = $album->getName();
+													$lastfmAlbum = Album::getInfo($artist->getName(),$album->getName());
 										?>
 										<div class="album">
-											<h3><?php echo $albums[$i]->getName()." (".$albums[$i]->getRelease().")"; ?></h3>
-											<div class="albumArt" id="<?php echo $albums[$i]->getURI(); ?>">
+											<h3><?php echo $album->getName()." (".$album->getRelease().")"; ?></h3>
+											<div class="albumArt" id="<?php echo $album->getURI(); ?>">
 												<img src="<?php echo $lastfmAlbum->getImage(Media::IMAGE_LARGE); ?>" />
 											</div>
 											<div class="tracklist">
@@ -101,7 +101,7 @@
 													</thead>
 													<tbody>
 											<?php
-														$spotifyAlbum = $spotify->lookupAlbum($albums[$i]->getURI(),true);
+														$spotifyAlbum = $spotify->lookupAlbum($album->getURI(),true);
 														$tracks = $spotifyAlbum->getTracks();
 														$i = 1;
 														foreach($tracks as $track){
