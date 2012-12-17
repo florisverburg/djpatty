@@ -81,7 +81,9 @@
 
 											// For testing purposes we limit the amount of albums, to speed things up. 
 											foreach($albums as $album){
-												if(in_array($album->getName(), $lastfmdata) && !in_array($album->getName(), $duplicateAlbums)){
+												$spotifyAlbum = $spotify->lookupAlbum($album->getURI(),true);
+												$tracks = $spotifyAlbum->getTracks();
+												if(in_array($album->getName(), $lastfmdata) && !in_array($album->getName(), $duplicateAlbums) && count($tracks) > 5){
 													$duplicateAlbums[] = $album->getName();
 													$lastfmAlbum = Album::getInfo($artist->getName(),$album->getName());
 										?>
@@ -101,8 +103,6 @@
 													</thead>
 													<tbody>
 											<?php
-														$spotifyAlbum = $spotify->lookupAlbum($album->getURI(),true);
-														$tracks = $spotifyAlbum->getTracks();
 														$i = 1;
 														foreach($tracks as $track){
 															echo "<tr class='track' data-original-title='test' data-album='".$track->getAlbum()->getURI()."' id='".$track->getURI()."''>";
