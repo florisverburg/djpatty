@@ -36,9 +36,15 @@ jQuery(document).ready(function(){
 
 function addScrollingImages(){
     for(var i = 0; i < jQuery('.albumArt').length; i++) {
+        if(!jQuery('.album')[i+1]){
+            var lim = jQuery(jQuery('.album')[i]).offset().top + jQuery(jQuery('.album')[i]).height() - jQuery(jQuery('.albumArt')[i]).height();
+        }
+        else{
+            var lim = jQuery(jQuery('.album')[i+1]).offset().top - jQuery(jQuery('.albumArt')[i]).height() - 10;
+        }
         jQuery(jQuery('.albumArt')[i]).scrollToFixed({
                 marginTop: 10,
-                limit: jQuery(jQuery('.album')[i+1]).offset().top - jQuery(jQuery('.albumArt')[i]).height() - 10
+                limit: lim
         });
     }
 }
@@ -50,7 +56,8 @@ function addClickListener(){
 }
 
 function setSpotifyPlayer(divId, trackId){
-	document.getElementById(divId).innerHTML = '<iframe class="spotifybutton" src="https://embed.spotify.com/?uri=' + trackId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+    var res = divId;
+	document.getElementById(res).innerHTML = '<iframe class="spotifybutton" src="https://embed.spotify.com/?uri=' + trackId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
 }
 
 var MyRequestsCompleted = (function() {
