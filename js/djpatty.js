@@ -1,44 +1,111 @@
-$(document).ready(function(){
+jQuery(document).ready(function(){
 
-	for (var i = 0; i < $('.albumArt').length; i++) {
-        $($('.albumArt')[i]).scrollToFixed({
-                marginTop: 10,
-                limit: $($('.album')[i+1]).offset().top - $($('.albumArt')[i]).height() - 10
+    var requestCallback = new MyRequestsCompleted({
+        numRequest: jQuery('.album').length,
+        singleCallback: function(){
+            addScrollingImages();
+            addClickListener();
+        }
+    });
+
+    
+
+    	for(var i = 0; i < jQuery('.album').length; i++) {
+
+            new Ajax.Request("loadAlbum.php", { 
+                method: 'GET', 
+                parameters: {
+                    artisturi: jQuery('.artist').attr('id'),
+                    albumuri: jQuery(jQuery('.album')[i]).attr('id'),
+                    artist: jQuery('.artist').attr('data-name'),
+                    album: jQuery(jQuery('.album')[i]).attr('data-name')
+                },
+                onSuccess: function(req){
+                    var response = req.responseText.split('@');
+                    console.log(response[0]);
+                    var div = document.getElementById(response[0]);
+                    div.innerHTML = response[1];
+                    requestCallback.requestComplete(true);
+                }, 
+                onFailure: function(req){
+                    jQuery('.artist').innerHTML = "<p>Album could not be loaded</p>";
+            }
         });
     }
-
-	$('.track').click(function(){
-		setSpotifyPlayer($(this).attr('data-album'),$(this).attr('id'));
-	})
 })
+
+function addScrollingImages(){
+    for(var i = 0; i < jQuery('.albumArt').length; i++) {
+        jQuery(jQuery('.albumArt')[i]).scrollToFixed({
+                marginTop: 10,
+                limit: jQuery(jQuery('.album')[i+1]).offset().top - jQuery(jQuery('.albumArt')[i]).height() - 10
+        });
+    }
+}
+
+function addClickListener(){
+    jQuery('.track').click(function(){
+        setSpotifyPlayer(jQuery(this).attr('data-album'),jQuery(this).attr('id'));
+    })
+}
 
 function setSpotifyPlayer(divId, trackId){
 	document.getElementById(divId).innerHTML = '<iframe class="spotifybutton" src="https://embed.spotify.com/?uri=' + trackId + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
 }
 
-(function($) {
-    $.isScrollToFixed = function(el) {
-        return $(el).data('ScrollToFixed') !== undefined;
+var MyRequestsCompleted = (function() {
+    var numRequestToComplete, requestsCompleted, callBacks, singleCallBack;
+
+    return function(options) {
+        if (!options) options = {};
+
+        numRequestToComplete = options.numRequest || 0;
+        requestsCompleted = options.requestsCompleted || 0;
+        callBacks = [];
+        var fireCallbacks = function() {
+            alert("we're all complete");
+            for (var i = 0; i < callBacks.length; i++) callBacks[i]();
+        };
+        if (options.singleCallback) callBacks.push(options.singleCallback);
+
+        this.addCallbackToQueue = function(isComplete, callback) {
+            if (isComplete) requestsCompleted++;
+            if (callback) callBacks.push(callback);
+            if (requestsCompleted == numRequestToComplete) fireCallbacks();
+        };
+        this.requestComplete = function(isComplete) {
+            if (isComplete) requestsCompleted++;
+            if (requestsCompleted == numRequestToComplete) fireCallbacks();
+        };
+        this.setCallback = function(callback) {
+            callBacks.push(callBack);
+        };
+    };
+})();
+
+(function(jQuery) {
+    jQuery.isScrollToFixed = function(el) {
+        return jQuery(el).data('ScrollToFixed') !== undefined;
     };
 
-    $.ScrollToFixed = function(el, options) {
+    jQuery.ScrollToFixed = function(el, options) {
         // To avoid scope issues, use 'base' instead of 'this' to reference this
         // class from internal events and functions.
         var base = this;
 
         // Access to jQuery and DOM versions of element.
-        base.$el = $(el);
+        base.jQueryel = jQuery(el);
         base.el = el;
 
         // Add a reverse reference to the DOM object.
-        base.$el.data('ScrollToFixed', base);
+        base.jQueryel.data('ScrollToFixed', base);
 
         // A flag so we know if the scroll has been reset.
         var isReset = false;
 
         // The element that was given to us to fix if scrolled above the top of
         // the page.
-        var target = base.$el;
+        var target = base.jQueryel;
 
         var position;
 
@@ -211,7 +278,7 @@ function setSpotifyPlayer(divId, trackId){
         // Checks to see if we need to do something based on new scroll position
         // of the page.
         function checkScroll() {
-            if (!$.isScrollToFixed(target)) return;
+            if (!jQuery.isScrollToFixed(target)) return;
             var wasReset = isReset;
 
             // If resetScroll has not yet been called, call it. This only
@@ -221,10 +288,10 @@ function setSpotifyPlayer(divId, trackId){
             }
 
             // Grab the current horizontal scroll position.
-            var x = $(window).scrollLeft();
+            var x = jQuery(window).scrollLeft();
 
             // Grab the current vertical scroll position.
-            var y = $(window).scrollTop();
+            var y = jQuery(window).scrollTop();
 
             // Get the limit, if there is one.
             var limit = getLimit();
@@ -232,7 +299,7 @@ function setSpotifyPlayer(divId, trackId){
             // If the vertical scroll position, plus the optional margin, would
             // put the target element at the specified limit, set the target
             // element to absolute.
-            if (base.options.minWidth && $(window).width() < base.options.minWidth) {
+            if (base.options.minWidth && jQuery(window).width() < base.options.minWidth) {
                 if (!isUnfixed() || !wasReset) {
                     postPosition();
                     target.trigger('preUnfixed');
@@ -281,7 +348,7 @@ function setSpotifyPlayer(divId, trackId){
                 }
             } else {
                 if (limit > 0) {
-                    if (y + $(window).height() - target.outerHeight(true) >= limit - getMarginTop()) {
+                    if (y + jQuery(window).height() - target.outerHeight(true) >= limit - getMarginTop()) {
                         if (isFixed()) {
                             postPosition();
                             target.trigger('preUnfixed');
@@ -333,8 +400,8 @@ function setSpotifyPlayer(divId, trackId){
         // resize events.
         base.init = function() {
             // Capture the options for this plugin.
-            base.options = $
-                    .extend({}, $.ScrollToFixed.defaultOptions, options);
+            base.options = jQuery
+                    .extend({}, jQuery.ScrollToFixed.defaultOptions, options);
 
             // Turn off this functionality for iOS devices until we figure out
             // what to do with them, or until iOS5 comes out which is supposed
@@ -348,24 +415,24 @@ function setSpotifyPlayer(divId, trackId){
             // Put the target element on top of everything that could be below
             // it. This reduces flicker when the target element is transitioning
             // to fixed.
-            base.$el.css('z-index', base.options.zIndex);
+            base.jQueryel.css('z-index', base.options.zIndex);
 
             // Create a spacer element to fill the void left by the target
             // element when it goes fixed.
-            spacer = $('<div />');
+            spacer = jQuery('<div />');
 
             position = target.css('position');
 
             // Place the spacer right after the target element.
-            if (isUnfixed()) base.$el.after(spacer);
+            if (isUnfixed()) base.jQueryel.after(spacer);
 
             // Reset the target element offsets when the window is resized, then
             // check to see if we need to fix or unfix the target element.
-            $(window).bind('resize.ScrollToFixed', windowResize);
+            jQuery(window).bind('resize.ScrollToFixed', windowResize);
 
             // When the window scrolls, check to see if we need to fix or unfix
             // the target element.
-            $(window).bind('scroll.ScrollToFixed', windowScroll);
+            jQuery(window).bind('scroll.ScrollToFixed', windowScroll);
             
             if (base.options.preFixed) {
                 target.bind('preFixed.ScrollToFixed', base.options.preFixed);
@@ -412,11 +479,11 @@ function setSpotifyPlayer(divId, trackId){
                 setUnfixed();
                 target.trigger('unfixed');
 
-                $(window).unbind('resize.ScrollToFixed', windowResize);
-                $(window).unbind('scroll.ScrollToFixed', windowScroll);
+                jQuery(window).unbind('resize.ScrollToFixed', windowResize);
+                jQuery(window).unbind('scroll.ScrollToFixed', windowScroll);
 
                 target.unbind('.ScrollToFixed');
-                base.$el.removeData('ScrollToFixed');
+                base.jQueryel.removeData('ScrollToFixed');
             });
             
             // Reset everything.
@@ -428,7 +495,7 @@ function setSpotifyPlayer(divId, trackId){
     };
 
     // Sets the option defaults.
-    $.ScrollToFixed.defaultOptions = {
+    jQuery.ScrollToFixed.defaultOptions = {
         marginTop : 0,
         limit : 0,
         bottom : -1,
@@ -437,9 +504,9 @@ function setSpotifyPlayer(divId, trackId){
 
     // Returns enhanced elements that will fix to the top of the page when the
     // page is scrolled.
-    $.fn.scrollToFixed = function(options) {
+    jQuery.fn.scrollToFixed = function(options) {
         return this.each(function() {
-            (new $.ScrollToFixed(this, options));
+            (new jQuery.ScrollToFixed(this, options));
         });
     };
 })(jQuery);

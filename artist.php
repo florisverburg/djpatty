@@ -31,6 +31,7 @@
 		<noscript><link rel="stylesheet" href="css/5grid/core.css" /><link rel="stylesheet" href="css/5grid/core-desktop.css" /><link rel="stylesheet" href="css/5grid/core-1200px.css" /><link rel="stylesheet" href="css/5grid/core-noscript.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" /></noscript>
 		<script src="css/5grid/jquery.js"></script>
 		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarHeight=55&amp;mobileUI.openerWidth=75&amp;mobileUI.openerText=&lt;"></script>
+		<script src="js/prototype.js"></script>
 		<script src="js/djpatty.js"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 	</head>
@@ -67,7 +68,7 @@
 							<div class="9u">
 								
 								<!-- Main Content -->
-									<section>
+									<section class="artist" id='<?php echo $artist->getURI(); ?>' data-name='<?php echo $artist->getName(); ?>'>
 										<header>
 											<h2><?php echo $artist->getName(); ?></h2>
 											<h3>Spotify score: <?php echo $artistpop->getPopularityAsPercent()."%"; ?></h3>
@@ -81,46 +82,14 @@
 
 											// For testing purposes we limit the amount of albums, to speed things up. 
 											foreach($albums as $album){
-												$spotifyAlbum = $spotify->lookupAlbum($album->getURI(),true);
-												$tracks = $spotifyAlbum->getTracks();
-												if(in_array($album->getName(), $lastfmdata) && !in_array($album->getName(), $duplicateAlbums) && count($tracks) > 5){
+												if(in_array($album->getName(), $lastfmdata) && !in_array($album->getName(), $duplicateAlbums)){
 													$duplicateAlbums[] = $album->getName();
-													$lastfmAlbum = Album::getInfo($artist->getName(),$album->getName());
 										?>
-										<div class="album">
-											<h3><?php echo $album->getName()." (".$album->getRelease().")"; ?></h3>
-											<div class="albumArt" id="<?php echo $album->getURI(); ?>">
-												<img src="<?php echo $lastfmAlbum->getImage(Media::IMAGE_LARGE); ?>" />
-											</div>
-											<div class="tracklist">
-												<table>
-													<thead>
-														<tr>
-															<th class="tracknumber"></th>
-															<th>Title</th>
-															<th class="duration">Duration</th>
-														</tr>
-													</thead>
-													<tbody>
-											<?php
-														$i = 1;
-														foreach($tracks as $track){
-															echo "<tr class='track' data-original-title='test' data-album='".$track->getAlbum()->getURI()."' id='".$track->getURI()."''>";
-															echo "<td>".$i."</td>";
-															echo "<td>".$track->getTitle()."</td>";
-															echo "<td>".$track->getLengthInMinutesAsString()."</td>";
-															echo "</tr>";
-															$i++;
-														}
-											?>
-												</table>
-											</div>
-										</div>
+										<div class="album" id='<?php echo $album->getURI(); ?>' data-name='<?php echo $album->getName(); ?>'></div>
 										<?php
 												}
 											}
 										?>
-										<div class="album"></div>
 									</section>
 
 							</div>
