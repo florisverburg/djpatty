@@ -71,8 +71,8 @@ class Database {
 		return 0;
 	}
 
-	public function getUsers(){
-		$query = "SELECT * FROM users";
+	public function getUser($username, $password){
+		$query = "SELECT * FROM users WHERE email='".$username."' AND password='".$password."'";
 		$result = mysql_query($query);
 
 		$array = array();
@@ -80,5 +80,12 @@ class Database {
 			$array[]= $row;
 		}
 		return $array;
+	}
+
+	public function registerUser($username,$password,$firstname,$lastname){
+		$query = "INSERT INTO users (email,password,first_name,last_name) VALUES ('".$username."','".$password."','".$firstname."','".$lastname."')";
+		
+		// There is a Unique constraint on the username, so the query will return false if that username is already taken.
+		return mysql_query($query);
 	}
 }
