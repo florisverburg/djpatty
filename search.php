@@ -8,12 +8,28 @@
 <?php
 	require_once('metatune/lib/config.php');
 
+
 	$spotify = MetaTune::getInstance();
 	if(isset($_REQUEST['q'])){
 		$query = $_REQUEST['q'];
 		$page = $_REQUEST['page'];
 	}
-	else {
+	
+	require_once("DBConfig.class.php");
+	require_once("Database.class.php");
+
+	$db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
+
+	session_start();
+	$ingelogd = false;
+	if(isset($_SESSION['username']) && isset($_SESSION['password'])){
+		$username = $_SESSION['username'];
+		$password = $_SESSION['password'];
+		$user = $db->getUser($username, $password);
+		if(count($user)>0){
+			$ingelogd = true;
+			$user = $user[0];
+		}
 	}
 ?>
 
@@ -42,11 +58,13 @@
 							
 							<!-- Nav -->
 								<nav class="mobileUI-site-nav">
-									<a href="index.php">Home</a>
-									<a href="threecolumn.html">Three Column</a>
-									<a href="twocolumn1.html">Two Column #1</a>
-									<a href="twocolumn2.html">Two Column #2</a>
-									<a href="onecolumn.html">One Column</a>
+									<a href="index.php">Homepage</a>
+								<?php if(!$ingelogd){ ?>
+									<a href="register.php">Sign Up</a>
+									<a href="login.php">Log In</a>
+								<?php } else { 
+									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>'; 
+								} ?>
 								</nav>
 
 						</div>

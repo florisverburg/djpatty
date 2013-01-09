@@ -1,3 +1,22 @@
+<?php
+require_once("DBConfig.class.php");
+require_once("Database.class.php");
+
+$db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
+
+session_start();
+$ingelogd = false;
+if(isset($_SESSION['username']) && isset($_SESSION['password'])){
+	$username = $_SESSION['username'];
+	$password = $_SESSION['password'];
+	$user = $db->getUser($username, $password);
+	if(count($user)>0){
+		$ingelogd = true;
+		$user = $user[0];
+	}
+}
+?>
+
 <!DOCTYPE HTML>
 <!--
 	Halcyonic 2.0 by HTML5 Up!
@@ -48,11 +67,13 @@
 							
 							<!-- Nav -->
 								<nav class="mobileUI-site-nav">
-									<a href="index.html">Homepage</a>
-									<a href="threecolumn.html">Three Column</a>
-									<a href="twocolumn1.html">Two Column #1</a>
-									<a href="twocolumn2.html">Two Column #2</a>
-									<a href="onecolumn.html">One Column</a>
+									<a href="index.php">Homepage</a>
+								<?php if(!$ingelogd){ ?>
+									<a href="register.php">Sign Up</a>
+									<a href="login.php">Log In</a>
+								<?php } else { 
+									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>'; 
+								} ?>
 								</nav>
 
 						</div>
@@ -90,7 +111,7 @@
 												}
 											}
 										?>
-										<div id="loading"><img src="images/loading.gif" /></div>
+										<div id="loading"><center><img src="images/loading.gif" /></center></div>
 									</section>
 
 							</div>
@@ -100,14 +121,22 @@
 									<section>
 										<header>
 											<h2>Related Artists</h2>
+											<p>
+												Artists similar to <?php echo $artist->getName(); ?>.					
+											</p>
 										</header>
 										<ul class="link-list">
-											<li><a href="#">Sed dolore viverra</a></li>
-											<li><a href="#">Ligula non varius</a></li>
-											<li><a href="#">Nec sociis natoque</a></li>
-											<li><a href="#">Penatibus et magnis</a></li>
-											<li><a href="#">Dis parturient montes</a></li>
-											<li><a href="#">Nascetur ridiculus</a></li>
+										<?php
+											$related = $db->getSimilarArtists($artist->getName(), 5);
+											if(count($related) > 0){
+												for($i = 0; $i < count($related); $i++){
+													$relatedartist = $spotify->searchArtist($related[$i][0])[0];
+													echo "<li><a href='artist.php?uri=".$relatedartist->getURI()."'>".$relatedartist->getName()."</a></li>";
+												}
+											}
+											else echo "<li>No similar artists found!</li>";
+											
+										?>
 										</ul>
 									</section>
 									<section>
@@ -126,7 +155,7 @@
 													}
 												}
 
-												else echo "<li>No upcoming events found!</li>";
+												
 											?>
 										</ul>
 

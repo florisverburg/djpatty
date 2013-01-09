@@ -18,47 +18,19 @@ class Database {
 	 *	Get similar artists based on the Last.FM 360K user dataset	
 	 *
 	 *	@param 		string 		$artist
+	 *	@param 		int 		The number of results
 	 *	@return 	string[] 	Array containing the names of the artists similar to the given parameter
 	 */
-	public function getSimilarArtists($artist){
-		$key = CallerFactory::getDefaultCaller()->getApiKey();
-		$genres = Artist::getTopTags($artist, $key);
-		$genre = $genres[0]->getName();
-		echo $genre ." <br><br>";
-		$query = "SELECT * FROM dataset WHERE artist = '".strtolower($artist)."' ORDER BY totalplays LIMIT 1000";
+	public function getSimilarArtists($artist,$limit){
+		$query = "SELECT artist2 FROM correlation WHERE artist1 = '".$artist."' ORDER BY correlation DESC LIMIT ".$limit;
+		
 		$result = mysql_query($query);
 
-		$userArray = array();
+		$array = array();
 		while($row = mysql_fetch_array($result)){
-			$userArray[] = $row;
+			$array[]= $row;
 		}
-
-		$similarArtists = array();
-
-		foreach($userArray as $user){
-			$query = "SELECT artist FROM dataset WHERE userid = '".$user['userid']."' ORDER BY totalplays LIMIT 5";
-			$result = mysql_query($query);
-			while($row = mysql_fetch_array($result)){
-				if (strpos($row['artist'], '?') === false){
-					if(!in_array($row['artist'], $similarArtists)){
-						$tags = Artist::getTopTags($row['artist'],$key);
-						$similar = false;
-						foreach($tags as $tag){
-							if($tag->getName() == $genre){
-								$similar = true;
-								break;
-							}
-						}
-						if($similar){
-							$similarArtists[] = $row['artist'];
-							echo $row['artist'] . "<br>";
-						}	
-					}
-				}
-			}
-		}
-
-		return $similarArtists;
+		return $array;
 	}
 
 	/**
@@ -80,6 +52,21 @@ class Database {
 			$array[]= $row;
 		}
 		return $array;
+	}
+
+	public function addPlay($userid, $artist, $artisturi){
+		$query = "SELECT * FROM plays WHERE user_id=".$userid." AND artist_uri='".$artisturi."'";
+		$result = mysql_query($query);
+
+		if(mysql_num_rows($result) < 1){
+			$query = "INSERT INTO plays (user_id, artist_name, artist_uri, plays) VALUES (".$userid.",'".$artist."','".$artisturi."', 1)";
+		}
+		else {
+			$query = "UPDATE plays SET plays = plays + 1 WHERE user_id=".$userid." AND artist_uri='".$artisturi."'";
+		}
+
+		$result = mysql_query($query);
+		return $result;
 	}
 
 	public function registerUser($username,$password,$firstname,$lastname){

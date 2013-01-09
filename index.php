@@ -1,3 +1,22 @@
+<?php
+require_once("DBConfig.class.php");
+require_once("Database.class.php");
+
+$db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
+
+session_start();
+$ingelogd = false;
+if(isset($_SESSION['username']) && isset($_SESSION['password'])){
+	$username = $_SESSION['username'];
+	$password = $_SESSION['password'];
+	$user = $db->getUser($username, $password);
+	if(count($user)>0){
+		$ingelogd = true;
+		$user = $user[0];
+	}
+}
+?>
+
 <!DOCTYPE HTML>
 <!--
 	Halcyonic 2.0 by HTML5 Up!
@@ -30,11 +49,13 @@
 							
 							<!-- Nav -->
 								<nav class="mobileUI-site-nav">
-									<a href="index.html">Homepage</a>
-									<a href="threecolumn.html">Three Column</a>
-									<a href="twocolumn1.html">Two Column #1</a>
-									<a href="twocolumn2.html">Two Column #2</a>
-									<a href="onecolumn.html">One Column</a>
+									<a href="index.php">Homepage</a>
+								<?php if(!$ingelogd){ ?>
+									<a href="register.php">Sign Up</a>
+									<a href="login.php">Log In</a>
+								<?php } else { 
+									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>'; 
+								} ?>
 								</nav>
 
 						</div>
@@ -66,7 +87,7 @@
 							<div class="6u">
 								
 								<!-- Banner Image -->
-									<a href="#" class="bordered-feature-image"><img src="images/banner.jpg" alt="" /></a>
+									<a href="http://localhost:8888/artist.php?uri=spotify:artist:6jJ0s89eD6GaHleKKya26X" class="bordered-feature-image"><img src="images/banner.gif" alt="" /></a>
 							</div>
 						</div>
 					</div>

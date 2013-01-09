@@ -22,6 +22,6 @@ require_once("Database.class.php");
 		header('location: index.php');
 	}
 	else{
-		header('location: login.php?test=true');
+		header('location: login.php?success=false');
 	}	
 ?>

@@ -7,8 +7,8 @@
 
 <?php 
 
-if(isset($_REQUEST['status'])){
-	$status = $_REQUEST['status'];
+if(isset($_REQUEST['success'])){
+	$status = $_REQUEST['success'];
 	if($status){
 ?>
 <script>alert('You have registered succesfully! Now redirecting to login page...'); window.location = "login.php";</script>

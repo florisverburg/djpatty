@@ -5,10 +5,8 @@ jQuery(document).ready(function(){
         singleCallback: function(){
             jQuery('#loading').remove();
             addScrollingImages();
-            addClickListener();
         }
     });
-
     
 
     	for(var i = 0; i < jQuery('.album').length; i++) {
@@ -26,6 +24,7 @@ jQuery(document).ready(function(){
                     console.log(response[0]);
                     var div = document.getElementById(response[0]);
                     div.innerHTML = response[1];
+                    addClickListener(jQuery(div));
                     requestCallback.requestComplete(true);
                 }, 
                 onFailure: function(req){
@@ -50,10 +49,21 @@ function addScrollingImages(){
     }
 }
 
-function addClickListener(){
-    jQuery('.track').click(function(){
+function addClickListener(container){
+    container.find('.track').click(function(){
+        addPlay(jQuery(this));
         setSpotifyPlayer(jQuery(this).attr('data-album'),jQuery(this).attr('id'));
     })
+}
+
+function addPlay(container){
+    new Ajax.Request("addPlay.php", { 
+        method: 'GET', 
+        parameters: {
+            artisturi: container.attr('data-artist-uri'),
+            artist: container.attr('data-artist')
+        }
+    });
 }
 
 function setSpotifyPlayer(divId, trackId){
@@ -71,7 +81,6 @@ var MyRequestsCompleted = (function() {
         requestsCompleted = options.requestsCompleted || 0;
         callBacks = [];
         var fireCallbacks = function() {
-            alert("we're all complete");
             for (var i = 0; i < callBacks.length; i++) callBacks[i]();
         };
         if (options.singleCallback) callBacks.push(options.singleCallback);

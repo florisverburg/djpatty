@@ -2,10 +2,10 @@
 
 class DBConfig {
 
-	const HOST_NAME = "sql.ewi.tudelft.nl";
-	const USER_NAME = "djpatty";
-	const PASSWORD  = "testtest";
-	const DB_NAME 	= "djpatty";
+	const HOST_NAME = "mysql04.totaalholding.nl";
+	const USER_NAME = "patric1q_test";
+	const PASSWORD  = "test1";
+	const DB_NAME 	= "patric1q_test";
 
 	public static function getHostName(){
 		return self::HOST_NAME;

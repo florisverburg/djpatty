@@ -24,7 +24,7 @@
 		$echo = "<h3>".$album->getName()." (".$album->getRelease().")</h3><div class='albumArt' id='a".$album->getURI()."'><img src='".$lastfmAlbum->getImage(Media::IMAGE_LARGE)."' /></div><div class='tracklist'><table><thead><tr><th class='tracknumber'></th><th>Title</th><th class='duration'>Duration</th></tr></thead><tbody>";
 		$i = 1;
 		foreach($tracks as $track){
-			$echo .= "<tr class='track' data-original-title='test' data-album='a".$track->getAlbum()->getURI()."' id='".$track->getURI()."''>";
+			$echo .= "<tr class='track' data-artist='".$lastfmArtist->getName()."' data-artist-uri='".$artisturi."' data-original-title='test' data-album='a".$track->getAlbum()->getURI()."' id='".$track->getURI()."''>";
 			$echo .= "<td>".$i."</td>";
 			$echo .= "<td>".$track->getTitle()."</td>";
 			$echo .= "<td>".$track->getLengthInMinutesAsString()."</td>";

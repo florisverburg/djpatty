@@ -16,5 +16,5 @@ require_once("Database.class.php");
 
 	$status = $db->registerUser($username,$password,$firstname,$lastname);
 
-	header('location: register.php?status='.$status);
+	header('location: register.php?success='.$status);
 ?>
