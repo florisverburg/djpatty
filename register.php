@@ -46,11 +46,14 @@ if(isset($_REQUEST['success'])){
 							
 							<!-- Nav -->
 								<nav class="mobileUI-site-nav">
-									<a href="index.html">Homepage</a>
-									<a href="threecolumn.html">Three Column</a>
-									<a href="twocolumn1.html">Two Column #1</a>
-									<a href="twocolumn2.html">Two Column #2</a>
-									<a href="onecolumn.html">One Column</a>
+									<a href="index.php">Homepage</a>
+								<?php if(!$ingelogd){ ?>
+									<a href="register.php">Sign Up</a>
+									<a href="login.php">Log In</a>
+								<?php } else { 
+									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>';
+									echo '<a href="logout.php">Log Out</a>'; 
+								} ?>
 								</nav>
 
 						</div>
@@ -98,7 +101,7 @@ if(isset($_REQUEST['success'])){
 
 		<!-- Copyright -->
 			<div id="copyright">
-				&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 Up!</a> | Images: <a href="http://fotogrph.com">Fotogrph</a>
+				&copy; djpatty.
 			</div>
 
 	</body>

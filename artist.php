@@ -72,7 +72,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 									<a href="register.php">Sign Up</a>
 									<a href="login.php">Log In</a>
 								<?php } else { 
-									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>'; 
+									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>';
+									echo '<a href="logout.php">Log Out</a>'; 
 								} ?>
 								</nav>
 
@@ -169,109 +170,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 			</div>
 
 		<!-- Footer -->
-			<div id="footer-wrapper">
-				<footer id="footer" class="5grid-layout">
-					<div class="row">
-						<div class="8u">
-						
-							<!-- Links -->
-								<section>
-									<h2>Links to Important Stuff</h2>
-									<div class="5grid">
-										<div class="row">
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</section>
-								<section>
-									<h2>Links to Important Stuff</h2>
-									<div class="5grid">
-										<div class="row">
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</section>
-
-						</div>
-						<div class="4u">
-							
-							<!-- Blurb -->
-								<section>
-									<h2>An Informative Text Blurb</h2>
-									<p>
-										Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed. Suspendisse eu 
-										varius nibh. Suspendisse vitae magna eget odio amet mollis. Duis neque nisi, 
-										dapibus sed mattis quis, sed rutrum accumsan sed. Suspendisse eu varius nibh 
-										lorem ipsum amet dolor sit amet lorem ipsum consequat gravida justo mollis.
-									</p>
-								</section>
-						
-						</div>
-					</div>
-				</footer>
-			</div>
+			
 
 		<!-- Copyright -->
 			<div id="copyright">

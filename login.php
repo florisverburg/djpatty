@@ -4,9 +4,32 @@
 	html5up.net | @nodethirtythree
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
+<?php
+require_once("DBConfig.class.php");
+require_once("Database.class.php");
+
+$db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
+
+session_start();
+$ingelogd = false;
+$succes = true;
+if(isset($_GET['success'])){
+	$succes = $$_GET['success'];
+}
+if(isset($_SESSION['username']) && isset($_SESSION['password'])){
+	$username = $_SESSION['username'];
+	$password = $_SESSION['password'];
+	$user = $db->getUser($username, $password);
+	if(count($user)>0){
+		$ingelogd = true;
+		$user = $user[0];
+	}
+}
+?>
+
 <html>
 	<head>
-		<title>Halcyonic: A Responsive HTML5 Site Template by HTML5 Up! (One Column)</title>
+		<title>Music by djpatty&trade; - Log in</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -14,6 +37,11 @@
 		<script src="css/5grid/jquery.js"></script>
 		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarHeight=55&amp;mobileUI.openerWidth=75&amp;mobileUI.openerText=&lt;"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+		<style type="text/css">
+			#wrong{
+				color: red;
+			}
+		</style>
 	</head>
 	<body class="subpage">
 	
@@ -24,15 +52,18 @@
 						<div class="12u">
 
 							<!-- Logo -->
-								<h1 class="mobileUI-site-name"><a href="#">djpatty</a></h1>
+								<h1 class="mobileUI-site-name"><a href="index.php">djpatty</a></h1>
 							
 							<!-- Nav -->
 								<nav class="mobileUI-site-nav">
-									<a href="index.html">Homepage</a>
-									<a href="threecolumn.html">Three Column</a>
-									<a href="twocolumn1.html">Two Column #1</a>
-									<a href="twocolumn2.html">Two Column #2</a>
-									<a href="onecolumn.html">One Column</a>
+									<a href="index.php">Homepage</a>
+								<?php if(!$ingelogd){ ?>
+									<a href="register.php">Sign Up</a>
+									<a href="login.php">Log In</a>
+								<?php } else { 
+									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>';
+									echo '<a href="logout.php">Log Out</a>'; 
+								} ?>
 								</nav>
 
 						</div>
@@ -54,6 +85,9 @@
 								
 								<div class="4u">
 									<section>
+										<?php
+											if(!$ingelogd){
+										?>
 										<div class="content">
 											<div class="form">
 												<center>
@@ -61,11 +95,23 @@
 														<h2>Login</h2>
 														<input id="input-username" name="username" type="text" placeholder="Email">
 														<br /><input id="input-password" name="password" type="password" placeholder="Password">
+														<?php
+															if(!$succes)
+																echo "<br /><label id='wrong'>Wrong credentials entered!</label>";
+														?>
 														<br /><button type="submit" class="button-small">Log In</button>
 													</form>
 												</center>
 											</div>
 										</div>
+										<?php
+											}
+											else{
+										?>
+										<center>You're already signed in!</center>
+										<?php
+											}
+										?>
 									</section>
 								</div>
 
@@ -81,7 +127,7 @@
 
 		<!-- Copyright -->
 			<div id="copyright">
-				&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 Up!</a> | Images: <a href="http://fotogrph.com">Fotogrph</a>
+				&copy; djpatty.
 			</div>
 
 	</body>

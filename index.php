@@ -54,7 +54,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 									<a href="register.php">Sign Up</a>
 									<a href="login.php">Log In</a>
 								<?php } else { 
-									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>'; 
+									echo '<a href="profile.php?id='.$user["id"].'">'.$user["first_name"].' '.$user["last_name"].'</a>';
+									echo '<a href="logout.php">Log Out</a>'; 
 								} ?>
 								</nav>
 
