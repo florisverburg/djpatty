@@ -25,7 +25,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 -->
 <html>
 	<head>
-		<title>Beaten by djpatty&trade;</title>
+		<title>Music by djpatty&trade;</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -94,72 +94,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 				</div>
 			</div>
 
-		<!-- Features -->
-			<div id="features-wrapper">
-				<div id="features">
-					<div class="5grid-layout">
-						<div class="row">
-							<div class="3u">
-							
-								<!-- Feature #1 -->
-									<section>
-										<a href="#" class="bordered-feature-image"><img src="images/pic01.jpg" alt="" /></a>
-										<h2>Welcome to Halcyonic</h2>
-										<p>
-											This is <strong>Halcyonic</strong>, a free site template 
-											by <a href="http://nodethirtythree.com/">N33</a> for
-											<a href="http://html5up.net">HTML5 Up!</a> It's responsive,
-											built on HTML5 + CSS3, and includes 5 unique page layouts.
-										</p>
-									</section>
-
-							</div>
-							<div class="3u">
-								
-								<!-- Feature #2 -->
-									<section>
-										<a href="#" class="bordered-feature-image"><img src="images/pic02.jpg" alt="" /></a>
-										<h2>Responsive You Say?</h2>
-										<p>
-											Yes! Halcyonic is built on the <a href="http://nodethirtythree.com/5grid/">5grid</a>
-											framework, so it has full responsive support for desktop, tablet,
-											and mobile device displays.
-										</p>
-									</section>
-
-							</div>
-							<div class="3u">
-								
-								<!-- Feature #3 -->
-									<section>
-										<a href="#" class="bordered-feature-image"><img src="images/pic03.jpg" alt="" /></a>
-										<h2>License Info</h2>
-										<p>
-											Halcyonic is licensed under the <a href="http://html5up.net/license">CCA 3.0</a> license,
-											so use it for personal or commercial use as much as you like (just keep
-											the footer credit intact).
-										</p>
-									</section>
-
-							</div>
-							<div class="3u">
-								
-								<!-- Feature #4 -->
-									<section>
-										<a href="#" class="bordered-feature-image"><img src="images/pic04.jpg" alt="" /></a>
-										<h2>Volutpat etiam aliquam</h2>
-										<p>
-											Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed. Suspendisse 
-											eu varius nibh. Suspendisse vitae magna eget odio amet mollis.
-										</p>
-									</section>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
+		
 		<!-- Content -->
 			<div id="content-wrapper">
 				<div id="content">
@@ -170,14 +105,12 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 								<!-- Box #1 -->
 									<section>
 										<header>
-											<h2>Who We Are</h2>
-											<h3>A subheading about who we are</h3>
+											<h2>Zanger Rinus</h2>
+											<h3>How djpatty changed his life.</h3>
 										</header>
-										<a href="#" class="feature-image"><img src="images/pic05.jpg" alt="" /></a>
+										<a href="#" class="feature-image"><img src="images/rinus_header.jpg" alt="" /></a>
 										<p>
-											Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed. 
-											Suspendisse eu varius nibh. Suspendisse vitae magna eget odio amet mollis 
-											justo facilisis quis. Sed sagittis mauris amet tellus gravida lorem ipsum.
+											Vroeger, toen alles beter was en muziek nog ouderwets op de acordeon bespeeld werd zonder autotune, was het intranet traag en onoverzichtelijk. Aanbiedingen van bananen waren lastig te vinden, om nog maar niet te spreken over goede artiesten! Grappig eigenlijk, dat djpatty al deze problemen oplost waardoor artiesten zoals ik; die nog steeds old-skool hipster muziek maken met bananen en acordeons + ronnie nu OOK gemakkelijk aan luisteraars komen. djpatty heeft mijn leven veranderd!
 										</p>
 									</section>
 
@@ -191,11 +124,11 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 											<h3>A subheading about what we do</h3>
 										</header>
 										<ul class="check-list">
-											<li>Sed mattis quis rutrum accum</li>
-											<li>Eu varius nibh suspendisse lorem</li>
-											<li>Magna eget odio amet mollis justo</li>
-											<li>Facilisis quis sagittis mauris</li>
-											<li>Amet tellus gravida lorem ipsum</li>
+											<li>FREE music streaming (oh r'ly? - yes really)</li>
+											<li>A wide variaty of FREE music (- yes really)</li>
+											<li>Recommendation based on your activity(oh, yes WE CAN!)</li>
+											<li>No free cookies (we already ate them)</li>
+											<li>Features bananas + Rinus plus Ronnie</li>
 										</ul>
 									</section>
 
@@ -210,19 +143,19 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 										</header>
 										<ul class="quote-list">
 											<li>
-												<img src="images/pic06.jpg" alt="" />
-												<p>"Neque nisidapibus mattis"</p>
-												<span>Jane Doe, CEO of UntitledCorp</span>
+												<img src="images/patty.png" alt="" />
+												<p>"Wow, now <u>that</u> is what I call awesomeeee"</p>
+												<span>Patty, DJ</span>
 											</li>
 											<li>
-												<img src="images/pic07.jpg" alt="" />
-												<p>"Lorem ipsum consequat!"</p>
-												<span>John Doe, President of FakeBiz</span>
+												<img src="images/nobodycares.jpg" alt="" />
+												<p>"Houdoe!"</p>
+												<span>Floris Verburg, Brabander</span>
 											</li>
 											<li>
-												<img src="images/pic08.jpg" alt="" />
-												<p>"Magna veroeros amet tempus"</p>
-												<span>Mary Smith, CFO of UntitledBiz</span>
+												<img src="images/rinus.jpg" alt="" />
+												<p>"Eet veel bananen, bananen zijn gezond!"</p>
+												<span>Rinus, Zanger</span>
 											</li>
 										</ul>
 									</section>
@@ -233,75 +166,9 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 				</div>
 			</div>
 
-		<!-- Footer -->
-			<div id="footer-wrapper">
-				<footer id="footer" class="5grid-layout">
-					<div class="row">
-						<div class="8u">
-						
-							<!-- Links -->
-								<section>
-									<h2>Links to Important Stuff</h2>
-									<div class="5grid">
-										<div class="row">
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-											<div class="3u">
-												<ul class="link-list last-child">
-													<li><a href="#">Neque amet dapibus</a></li>
-													<li><a href="#">Sed mattis quis rutrum</a></li>
-													<li><a href="#">Accumsan suspendisse</a></li>
-													<li><a href="#">Eu varius vitae magna</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</section>
-
-						</div>
-						<div class="4u">
-							
-							<!-- Blurb -->
-								<section>
-									<h2>An Informative Text Blurb</h2>
-									<p>
-										Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed. Suspendisse eu 
-										varius nibh. Suspendisse vitae magna eget odio amet mollis. Duis neque nisi, 
-										dapibus sed mattis quis, sed rutrum accumsan sed. Suspendisse eu varius nibh 
-										lorem ipsum amet dolor sit amet lorem ipsum consequat gravida justo mollis.
-									</p>
-								</section>
-						
-						</div>
-					</div>
-				</footer>
-			</div>
-
 		<!-- Copyright -->
 			<div id="copyright">
-				&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 Up!</a> | Images: <a href="http://fotogrph.com">Fotogrph</a>
+				&copy; djpatty. 
 			</div>
 
 	</body>
