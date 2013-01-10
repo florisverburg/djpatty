@@ -89,6 +89,9 @@ $spotify = MetaTune::getInstance();
 							</div>
 						</div>
 
+						<?php
+							if($ingelogd){
+						?>
 						<div class="row">
 							<div class="12u">
 								<center>
@@ -99,31 +102,19 @@ $spotify = MetaTune::getInstance();
 								</center>
 							</div>
 						</div>
-
 						<div class="row" >
 							<div class="6u">
-							
-								<!-- Banner Copy -->
-								<?php
-									if(!$ingelogd){
-								?>
-
-
-								<?php
-									}
-									else {
-								?>
-									<section>
-										<header>
-											<h2>Artists</h2>
-										</header>
-								<?php
-										$recommendations = $db->getRecommendations($user['id']);
-										if(count($recommendations)>0){
+								<section>
+									<header>
+										<h2>Artists</h2>
+									</header>
+									<?php
+										$artistrecommendations = $db->getRecommendations($user['id']);
+										if(count($artistrecommendations)>0){
 											echo "<ul class='link-list'>";
-											for($i = 0; $i < min(count($recommendations),5); $i++){
-												$artist = $spotify->searchArtist($recommendations[$i][0])[0];
-												$lastfmArtist = Artist::getInfo($recommendations[$i][0]);
+											for($i = 0; $i < min(count($artistrecommendations),5); $i++){
+												$artist = $spotify->searchArtist($artistrecommendations[$i][0])[0];
+												$lastfmArtist = Artist::getInfo($artistrecommendations[$i][0]);
 												$tags = $lastfmArtist->getArtistTags();
 												$tagstring = "tagged as ";
 												foreach($tags as $tag){
@@ -138,17 +129,30 @@ $spotify = MetaTune::getInstance();
 											echo "</ul>";
 										}
 										else echo "<p>We're sorry, no recommendations could be found.</p>";
-										echo "</section>";
+									?>
+								</section>
+							</div>
+							<div class="6u" >
+								<section>
+									<header>
+										<h2>Events</h2>
+									</header>
+									<?php
+										echo "<p>We're sorry, no recommendations could be found.</p>";
+									?>
+								</section>
+							</div>
+						<?php 
+									// end if($isingelogd)
+									} 
+									else {
+										
+										// TODO: ADD SOMETHING
+
 									}
 								?>
 									
-
-							</div>
-							<div class="6u" >
 								
-								<!-- Banner Image -->
-									<a href="http://localhost:8888/artist.php?uri=spotify:artist:6jJ0s89eD6GaHleKKya26X" class="bordered-feature-image"><img src="images/banner.gif" alt="" /></a>
-							</div>
 						</div>
 						<div class="row">
 							<div class="4u">
