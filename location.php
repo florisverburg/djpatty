@@ -105,7 +105,6 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 										        $rip = "unknown"; 
 										     }
 
-
 										     echo $rip."<br>";
 											$tags = get_meta_tags('http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt&IpAddress='.$rip);
 											echo $tags['longitude']."<br />".$tags['latitude'];  // city name
