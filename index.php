@@ -1,6 +1,7 @@
 <?php
 require_once("DBConfig.class.php");
 require_once("Database.class.php");
+require_once("APIHelper.class.php");
 
 $db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
 
@@ -138,10 +139,22 @@ $spotify = MetaTune::getInstance();
 										<h2>Events</h2>
 									</header>
 									<?php
-										echo "<p>We're sorry, no recommendations could be found.</p>";
+										$events = APIHelper::getEventRecommendations($artistrecommendations);
+										if(count($events)>0){
+										echo "<ul class='link-list'>";
+											for($i = 0; $i < min(count($events),5); $i++){
+												echo "<li>";
+												echo "<a href='".$events[$i][4]->getUrl()."'>".$events[$i][4]->getTitle()."</a>";
+												echo "<span class='tags'>".date("d-m-Y",$events[$i][4]->getStartDate())."</span>";
+												echo "</li>";
+											}
+											echo "</ul>";
+										}
+										else echo "<p>We're sorry, no recommendations could be found.</p>";
 									?>
 								</section>
 							</div>
+						</div>
 						<?php 
 									// end if($isingelogd)
 									} 
@@ -153,7 +166,7 @@ $spotify = MetaTune::getInstance();
 								?>
 									
 								
-						</div>
+						
 						<div class="row">
 							<div class="4u">
 
