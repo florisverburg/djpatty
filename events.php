@@ -10,6 +10,7 @@
 	require_once('lastfm_api/lastfm.api.php');
 	require_once("DBConfig.class.php");
 	require_once("Database.class.php");
+	error_reporting(0);
 
 	$LAST_FM_API_KEY = '764d5b2b6e44a878abcb9dba6d77d33f';
 	CallerFactory::getDefaultCaller()->setApiKey($LAST_FM_API_KEY);

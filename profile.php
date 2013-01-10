@@ -3,7 +3,7 @@
 <?php
 require_once("DBConfig.class.php");
 require_once("Database.class.php");
-
+error_reporting(0);
 $db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
 
 session_start();

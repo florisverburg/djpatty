@@ -5,15 +5,38 @@ require_once('metatune/lib/config.php');
 
 class APIHelper {
 
+
 	public static function getEventRecommendations($artists){
 		$LAST_FM_API_KEY = '764d5b2b6e44a878abcb9dba6d77d33f';
 		CallerFactory::getDefaultCaller()->setApiKey($LAST_FM_API_KEY);
 		$spotify = MetaTune::getInstance();
 
-		
+		if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+		 { 
+	        $rip = getenv("HTTP_CLIENT_IP"); 
+	     } 
+	     else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown")) 
+	     { 
+	        $rip = getenv("HTTP_X_FORWARDED_FOR"); 
+	     } 
+	     else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown")) 
+	     { 
+	        $rip = getenv("REMOTE_ADDR"); 
+	     } 
+	     else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown")) 
+	     { 
+	        $rip = $_SERVER['REMOTE_ADDR']; 
+	     } 
+	     else 
+	     { 
+	        $rip = "unknown"; 
+	     }
+
+	     $tags = get_meta_tags('http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt&IpAddress='.$rip);
+	     $lat = $tags['latitude'];
+	     $long = $tags['longitude'];
+			
 		$events = array();
-		$long = 0;
-		$lat = 1;
 		for($i = 0; $i < count($artists); $i++){
 			$event = Artist::getEvents($artists[$i][0]);
 			for($j = 0; $j < count($event); $j++){
@@ -40,4 +63,5 @@ class APIHelper {
 		usort($events, 'sortByOrder2');
 		return $events;
 	}
+
 }

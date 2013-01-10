@@ -2,6 +2,7 @@
 require_once("DBConfig.class.php");
 require_once("Database.class.php");
 require_once("APIHelper.class.php");
+error_reporting(0);
 
 $db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
 
@@ -114,7 +115,8 @@ $spotify = MetaTune::getInstance();
 										if(count($artistrecommendations)>0){
 											echo "<ul class='link-list'>";
 											for($i = 0; $i < min(count($artistrecommendations),5); $i++){
-												$artist = $spotify->searchArtist($artistrecommendations[$i][0])[0];
+												$artist = $spotify->searchArtist($artistrecommendations[$i][0]);
+												$artist = $artist[0];
 												$lastfmArtist = Artist::getInfo($artistrecommendations[$i][0]);
 												$tags = $lastfmArtist->getArtistTags();
 												$tagstring = "tagged as ";
