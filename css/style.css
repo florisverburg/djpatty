@@ -74,6 +74,15 @@
 			border-bottom: 0 !important;
 		}
 
+		.link-list a{
+			font-size: 120%;
+		}
+
+		.link-list span.tags
+		{
+			display: block;
+		}
+
 		#content .link-list li
 		{
 			border-bottom: solid 1px #e2e6e8;
@@ -521,4 +530,5 @@ section {
 .eventinfo{
 	font-weight: bold;
 }
+
 

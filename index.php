@@ -15,6 +15,15 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 		$user = $user[0];
 	}
 }
+
+require_once('metatune/lib/config.php');
+require_once('lastfm_api/lastfm.api.php');
+
+$LAST_FM_API_KEY = '764d5b2b6e44a878abcb9dba6d77d33f';
+CallerFactory::getDefaultCaller()->setApiKey($LAST_FM_API_KEY);
+
+$spotify = MetaTune::getInstance();
+
 ?>
 
 <!DOCTYPE HTML>
@@ -29,10 +38,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<noscript><link rel="stylesheet" href="css/5grid/core.css" /><link rel="stylesheet" href="css/5grid/core-desktop.css" /><link rel="stylesheet" href="css/5grid/core-1200px.css" /><link rel="stylesheet" href="css/5grid/core-noscript.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" />
-			<link rel="stylesheet/less" href="less/djpatty.less" type="text/css" /></noscript>
+		<noscript><link rel="stylesheet" href="css/5grid/core.css" /><link rel="stylesheet" href="css/5grid/core-desktop.css" /><link rel="stylesheet" href="css/5grid/core-1200px.css" /><link rel="stylesheet" href="css/5grid/core-noscript.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" /></noscript>
 		<script src="css/5grid/jquery.js"></script>
-		<script src="js/less.js"></script>
 		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarHeight=55&amp;mobileUI.openerWidth=75&amp;mobileUI.openerText=&lt;"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 	</head>
@@ -62,37 +69,6 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 						</div>
 					</div>
 				</header>
-				<div id="banner">
-					<div class="5grid-layout">
-						<div class="row">
-							<div class="6u">
-							
-								<!-- Banner Copy -->
-									<div id = "search" class="span12">
-										<form method = "get" action="search.php">
-											<fieldset>
-												<legend>
-													Search
-												</legend>
-											</fieldset>
-											<ul>
-												<li class="dropdown active">
-													<input type="hidden" name="page" value="1" />
-													<input type="text" placeholder="Search" name="q"></a>  
-												</li>
-											</ul>
-										</form>
-									</div>
-
-							</div>
-							<div class="6u">
-								
-								<!-- Banner Image -->
-									<a href="http://localhost:8888/artist.php?uri=spotify:artist:6jJ0s89eD6GaHleKKya26X" class="bordered-feature-image"><img src="images/banner.gif" alt="" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 
 		
@@ -100,6 +76,80 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 			<div id="content-wrapper">
 				<div id="content">
 					<div class="5grid-layout">
+						<div class="row">
+							<div class="12u">
+								<center>
+									<div id="search">
+										<form method = "get" action="search.php">
+											<input type="hidden" name="page" value="1" />
+											<input type="text" placeholder="Search..." name="q" style="width:50%;"></a>  
+										</form>
+									</div>
+								</center>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="12u">
+								<center>
+									<header>
+										<h2>Recommended for you</h2>
+										<h3>Based on the artists you listened to.</h3>
+									</header>
+								</center>
+							</div>
+						</div>
+
+						<div class="row" >
+							<div class="6u">
+							
+								<!-- Banner Copy -->
+								<?php
+									if(!$ingelogd){
+								?>
+
+
+								<?php
+									}
+									else {
+								?>
+									<section>
+										<header>
+											<h2>Artists</h2>
+										</header>
+								<?php
+										$recommendations = $db->getRecommendations($user['id']);
+										if(count($recommendations)>0){
+											echo "<ul class='link-list'>";
+											for($i = 0; $i < min(count($recommendations),5); $i++){
+												$artist = $spotify->searchArtist($recommendations[$i][0])[0];
+												$lastfmArtist = Artist::getInfo($recommendations[$i][0]);
+												$tags = $lastfmArtist->getArtistTags();
+												$tagstring = "tagged as ";
+												foreach($tags as $tag){
+													$tagstring .= $tag->getName().", ";
+												}
+
+												echo "<li>";
+												echo "<a href='artist.php?uri=".$artist->getURI()."'>".$artist->getName()."</a>";
+												echo "<span class='tags'>".substr($tagstring, 0, strlen($tagstring)-2)."</span>";
+												echo "</li>";
+											}
+											echo "</ul>";
+										}
+										else echo "<p>We're sorry, no recommendations could be found.</p>";
+										echo "</section>";
+									}
+								?>
+									
+
+							</div>
+							<div class="6u" >
+								
+								<!-- Banner Image -->
+									<a href="http://localhost:8888/artist.php?uri=spotify:artist:6jJ0s89eD6GaHleKKya26X" class="bordered-feature-image"><img src="images/banner.gif" alt="" /></a>
+							</div>
+						</div>
 						<div class="row">
 							<div class="4u">
 
@@ -122,7 +172,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 									<section>
 										<header>
 											<h2>What We Do</h2>
-											<h3>A subheading about what we do</h3>
+											<h3>Because we're <u>that</u> awesome.</h3>
 										</header>
 										<ul class="check-list">
 											<li>FREE music streaming (oh r'ly? - yes really)</li>
@@ -140,7 +190,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 									<section>
 										<header>
 											<h2>What People Are Saying</h2>
-											<h3>And a final subheading about our clients</h3>
+											<h3>It's legen... wait for it... DARY.</h3>
 										</header>
 										<ul class="quote-list">
 											<li>

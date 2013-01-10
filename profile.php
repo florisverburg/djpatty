@@ -89,9 +89,9 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 								
 								<div class="6u">
 									<section>
-										<h3>Five most listened artists<h3>
+										<h3>Your most listened artists<h3>
 										<?php
-											$plays = $db->getFiveMostListenedArtist($id);
+											$plays = $db->getMostListenedArtist($id,5);
 											echo "<table>";
 											echo "<th>Artist</th>";
 											echo "<th>Number of plays</th>";
