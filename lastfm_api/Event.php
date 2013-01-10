@@ -225,6 +225,10 @@ class Event {
 		return $this->tag;
 	}
 
+	public function getCountry(){
+		return $this->getVenue()->getLocation()->getCountry();
+	}
+
 	/** Set a user's attendance status for an event.
 	 *
 	 * @param	integer	$event		The numeric last.fm event ID. (Required)
