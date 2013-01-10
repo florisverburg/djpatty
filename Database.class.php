@@ -22,7 +22,7 @@ class Database {
 	 *	@return 	string[] 	Array containing the names of the artists similar to the given parameter
 	 */
 	public function getSimilarArtists($artist,$limit){
-		$query = "SELECT artist2 FROM correlation WHERE artist1 = '".$artist."' ORDER BY correlation DESC LIMIT ".$limit;
+		$query = "SELECT DISTINCT artist2 FROM correlation WHERE artist1 = '".$artist."' ORDER BY correlation DESC LIMIT ".$limit;
 		
 		$result = mysql_query($query);
 
@@ -52,6 +52,20 @@ class Database {
 			$array[]= $row;
 		}
 		return $array;
+	}
+
+	public function getFiveMostListenedArtist($id){
+		$query = "SELECT * FROM plays WHERE user_id = ".$id." ORDER BY plays DESC LIMIT 5";
+		$result = mysql_query($query);
+
+		return $result;
+	}
+
+	public function getUserInformation($id){
+		$query = "SELECT * FROM users WHERE id = ".$id;
+		$result = mysql_query($query);
+
+		return $result;
 	}
 
 	public function addPlay($userid, $artist, $artisturi){

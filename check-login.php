@@ -18,7 +18,7 @@ require_once("Database.class.php");
 		session_start();
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
-		$_SESSION['id'] = $user[0]['id'];
+		$_SESSION['id'] = $userArray[0]['id'];
 		header('location: index.php');
 	}
 	else{

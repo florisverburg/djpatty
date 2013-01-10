@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Halcyonic 2.0 by HTML5 Up!
-	html5up.net | @nodethirtythree
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <?php
 require_once("DBConfig.class.php");
 require_once("Database.class.php");
