@@ -36,6 +36,7 @@ $spotify = MetaTune::getInstance();
 -->
 <html>
 	<head>
+		<link id="page_favicon" href="favicon.ico" rel="icon" type="image/x-icon">
 		<title>Music by djpatty&trade;</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
@@ -43,6 +44,8 @@ $spotify = MetaTune::getInstance();
 		<noscript><link rel="stylesheet" href="css/5grid/core.css" /><link rel="stylesheet" href="css/5grid/core-desktop.css" /><link rel="stylesheet" href="css/5grid/core-1200px.css" /><link rel="stylesheet" href="css/5grid/core-noscript.css" /><link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/style-desktop.css" /></noscript>
 		<script src="css/5grid/jquery.js"></script>
 		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarHeight=55&amp;mobileUI.openerWidth=75&amp;mobileUI.openerText=&lt;"></script>
+		<script src="js/prototype.js"></script>
+		<script src="js/djpatty.js"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 	</head>
 	<body>
@@ -110,29 +113,31 @@ $spotify = MetaTune::getInstance();
 									<header>
 										<h2>Artists</h2>
 									</header>
-									<?php
-										$artistrecommendations = $db->getRecommendations($user['id']);
-										if(count($artistrecommendations)>0){
-											echo "<ul class='link-list'>";
-											for($i = 0; $i < min(count($artistrecommendations),5); $i++){
-												$artist = $spotify->searchArtist($artistrecommendations[$i][0]);
-												$artist = $artist[0];
-												$lastfmArtist = Artist::getInfo($artistrecommendations[$i][0]);
-												$tags = $lastfmArtist->getArtistTags();
-												$tagstring = "tagged as ";
-												foreach($tags as $tag){
-													$tagstring .= $tag->getName().", ";
-												}
+									<div>
+										<?php
+											$artistrecommendations = $db->getRecommendations($user['id']);
+											if(count($artistrecommendations)>0){
+												echo "<ul class='link-list'>";
+												for($i = 0; $i < min(count($artistrecommendations),5); $i++){
+													$artist = $spotify->searchArtist($artistrecommendations[$i][0]);
+													$artist = $artist[0];
+													$lastfmArtist = Artist::getInfo($artistrecommendations[$i][0]);
+													$tags = $lastfmArtist->getArtistTags();
+													$tagstring = "tagged as ";
+													foreach($tags as $tag){
+														$tagstring .= $tag->getName().", ";
+													}
 
-												echo "<li>";
-												echo "<a href='artist.php?uri=".$artist->getURI()."'>".$artist->getName()."</a>";
-												echo "<span class='tags'>".substr($tagstring, 0, strlen($tagstring)-2)."</span>";
-												echo "</li>";
+													echo "<li>";
+													echo "<a href='artist.php?uri=".$artist->getURI()."'>".$artist->getName()."</a>";
+													echo "<span class='tags'>".substr($tagstring, 0, strlen($tagstring)-2)."</span>";
+													echo "</li>";
+												}
+												echo "</ul>";
 											}
-											echo "</ul>";
-										}
-										else echo "<p>We're sorry, no recommendations could be found.</p>";
-									?>
+											else echo "<p>We're sorry, no recommendations could be found.</p>";
+										?>
+									</div>
 								</section>
 							</div>
 							<div class="6u" >
@@ -140,20 +145,9 @@ $spotify = MetaTune::getInstance();
 									<header>
 										<h2>Events</h2>
 									</header>
-									<?php
-										$events = APIHelper::getEventRecommendations($artistrecommendations);
-										if(count($events)>0){
-										echo "<ul class='link-list'>";
-											for($i = 0; $i < min(count($events),5); $i++){
-												echo "<li>";
-												echo "<a href='".$events[$i][4]->getUrl()."'>".$events[$i][4]->getTitle()."</a>";
-												echo "<span class='tags'>".date("d-m-Y",$events[$i][4]->getStartDate())."</span>";
-												echo "</li>";
-											}
-											echo "</ul>";
-										}
-										else echo "<p>We're sorry, no recommendations could be found.</p>";
-									?>
+									<div id="<?php echo $user['id']?>" class="recommendEvents">
+										<div id="loading"><center><img src="images/loading.gif" /></center></div>
+									</div>
 								</section>
 							</div>
 						</div>

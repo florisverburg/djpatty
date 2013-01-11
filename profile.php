@@ -75,6 +75,9 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 							<div class="12u">
 							
 								<!-- Main Content -->
+								<?php
+									if($db->checkId($id)){
+								?>
 								<div class="5u">
 									<section>
 										<h3>Profile information</h3>
@@ -105,6 +108,20 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 										?>
 									</section>
 								</div>
+								<?php 
+									}
+									else{
+								?>
+								<div class="4u">
+								</div>
+								<div class="4u">
+									<section>This user isn't found!</section>
+								</div>
+								<div class="4u">
+								</div>
+								<?php
+									}
+								?>
 
 							</div>
 						</div>

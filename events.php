@@ -20,7 +20,8 @@
 		$uri = $_REQUEST['artist'];
 		$artist = $spotify->lookupArtist($uri,true);
 		$lastfmArtist = Artist::getInfo($artist);
-		$artistpop = $spotify->searchArtist($artist->getName())[0];
+		$artistpop = $spotify->searchArtist($artist->getName());
+		$artistpop = $artistpop[0];
 	}
 	else {
 	}
@@ -149,19 +150,6 @@
 							<div class="3u">
 								
 								<!-- Sidebar -->
-									<section>
-										<header>
-											<h2>Related Events</h2>
-										</header>
-										<ul class="link-list">
-											<li><a href="#">Sed dolore viverra</a></li>
-											<li><a href="#">Ligula non varius</a></li>
-											<li><a href="#">Nec sociis natoque</a></li>
-											<li><a href="#">Penatibus et magnis</a></li>
-											<li><a href="#">Dis parturient montes</a></li>
-											<li><a href="#">Nascetur ridiculus</a></li>
-										</ul>
-									</section>
 									<section>
 										<header>
 											<h2>Artist Info</h2>

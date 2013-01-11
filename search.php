@@ -17,6 +17,7 @@
 	
 	require_once("DBConfig.class.php");
 	require_once("Database.class.php");
+	ini_set( "display_errors", 0);
 
 	$db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
 

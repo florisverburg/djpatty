@@ -1,6 +1,7 @@
 <?php
 require_once("DBConfig.class.php");
 require_once("Database.class.php");
+error_reporting(0);
 
 $db = new Database(DBConfig::getHostName(),DBConfig::getUser(),DBConfig::getPassword(), DBConfig::getDatabaseName());
 
@@ -35,7 +36,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 		$uri = $_REQUEST['uri'];
 		$artist = $spotify->lookupArtist($uri,true);
 		$lastfmArtist = Artist::getInfo($artist);
-		$artistpop = $spotify->searchArtist($artist->getName())[0];
+		$artistpop = $spotify->searchArtist($artist->getName());
+		$artistpop = $artistpop[0];
 	}
 	else {
 	}
@@ -131,7 +133,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 											$related = $db->getSimilarArtists($artist->getName(), 5);
 											if(count($related) > 0){
 												for($i = 0; $i < count($related); $i++){
-													$relatedartist = $spotify->searchArtist($related[$i][0])[0];
+													$relatedartist = $spotify->searchArtist($related[$i][0]);
+													$relatedartist = $relatedartist[0];
 													echo "<li><a href='artist.php?uri=".$relatedartist->getURI()."'>".$relatedartist->getName()."</a></li>";
 												}
 											}
@@ -152,7 +155,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 												$events = Artist::getEvents($lastfmArtist->getName());
 												if(sizeof($events)>0){
 													for($i = 0; $i < min(sizeof($events),5); $i++){
-														echo "<li><a href='".$events[$i]->getUrl()."'>".date("F j, Y",$events[$i]->getStartDate())." at ".$events[$i]->getVenue()->getName()."</a></li>";
+														echo "<li><a target='_BLANK' href='".$events[$i]->getUrl()."'>".date("F j, Y",$events[$i]->getStartDate())." at ".$events[$i]->getVenue()->getName()."</a></li>";
 													}
 												}
 

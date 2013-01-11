@@ -29,9 +29,26 @@ jQuery(document).ready(function(){
                 }, 
                 onFailure: function(req){
                     jQuery('.artist').innerHTML = "<p>Album could not be loaded</p>";
+                }
+            });
+        }
+
+    for(var i = 0; i < jQuery('.recommendEvents').length; i++){
+        new Ajax.Request("loadEvents.php", {
+            method: 'GET',
+            parameters: {
+                userid: jQuery('.recommendEvents').attr('id')
+            },
+            onSuccess: function(req){
+                jQuery('.recommendEvents')[0].innerHTML = req.responseText;
+                requestCallback.requestComplete(true);
+            },
+            onFailure: function(req){
+                jQuery('.recommendEvents').innerHTML[0] = "<p>Event recommendations could not be loaded</p>";
             }
         });
     }
+
 })
 
 function addScrollingImages(){

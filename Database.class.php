@@ -33,6 +33,16 @@ class Database {
 		return $array;
 	}
 
+	public function checkId($id){
+		$result = mysql_query("SELECT * FROM users WHERE id =".$id);
+		if(mysql_num_rows($result)>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	public function getRecommendations($id){
 		$sql = mysql_query("SELECT artist_name FROM plays where user_id = ".$id." AND plays > 1 ORDER BY plays DESC LIMIT 10");
         $artists = array();
