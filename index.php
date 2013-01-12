@@ -146,7 +146,7 @@ $spotify = MetaTune::getInstance();
 										<h2>Events</h2>
 									</header>
 									<div id="<?php echo $user['id']?>" class="recommendEvents">
-										<div id="loading"><center><img src="images/loading.gif" /></center></div>
+										<div id="load"><center><img src="images/loading.gif" /></center></div>
 									</div>
 								</section>
 							</div>

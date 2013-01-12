@@ -33,6 +33,12 @@ jQuery(document).ready(function(){
             });
         }
 
+        if(jQuery('.album').length < 1 && jQuery('#loading')){
+            var div = jQuery('#loading');
+            if(div[0] != undefined)
+                div[0].innerHTML = "<h3>This artist has no albums</h3>";
+        }
+
     for(var i = 0; i < jQuery('.recommendEvents').length; i++){
         new Ajax.Request("loadEvents.php", {
             method: 'GET',
@@ -41,7 +47,6 @@ jQuery(document).ready(function(){
             },
             onSuccess: function(req){
                 jQuery('.recommendEvents')[0].innerHTML = req.responseText;
-                requestCallback.requestComplete(true);
             },
             onFailure: function(req){
                 jQuery('.recommendEvents').innerHTML[0] = "<p>Event recommendations could not be loaded</p>";

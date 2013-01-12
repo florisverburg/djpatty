@@ -2,7 +2,7 @@
 // Example config file.
 
 // Should contain this. 
-header("Content-Type: text/html; charset=UTF-8");
+//header("Content-Type: text/html; charset=UTF-8");
 
 /**
  * Global settings - Individual config. Just nice to have in a config file.
