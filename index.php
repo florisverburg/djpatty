@@ -169,12 +169,11 @@ $spotify = MetaTune::getInstance();
 								<!-- Box #1 -->
 									<section>
 										<header>
-											<h2>Zanger Rinus</h2>
-											<h3>How djpatty changed his life.</h3>
+											<h2>Recommendations</h2>
+											<h3>Find artists you'd never find yourself!</h3>
 										</header>
-										<a href="#" class="feature-image"><img src="images/rinus_header.jpg" alt="" /></a>
 										<p>
-											Vroeger, toen alles beter was en muziek nog ouderwets op de acordeon bespeeld werd zonder autotune, was het intranet traag en onoverzichtelijk. Aanbiedingen van bananen waren lastig te vinden, om nog maar niet te spreken over goede artiesten! Grappig eigenlijk, dat djpatty al deze problemen oplost waardoor artiesten zoals ik; die nog steeds old-skool hipster muziek maken met bananen en acordeons + ronnie nu OOK gemakkelijk aan luisteraars komen. djpatty heeft mijn leven veranderd!
+											Ever found yourself listening to the same old artist over and over again for hours? We know we did! Upon registering at djpatty, we keep track of every artist you check out on artist-pages and what tracks you listened to on their artist page. Based on your listening behaviour both artists and events that match your interests can be found on your home-page. It is thát easy! Why don't you sign up right now, it's FREE!
 										</p>
 									</section>
 
@@ -188,11 +187,11 @@ $spotify = MetaTune::getInstance();
 											<h3>Because we're <u>that</u> awesome.</h3>
 										</header>
 										<ul class="check-list">
-											<li>FREE music streaming (oh r'ly? - yes really)</li>
-											<li>A wide variaty of FREE music (- yes really)</li>
-											<li>Recommendation based on your activity(oh, yes WE CAN!)</li>
-											<li>No free cookies (we already ate them)</li>
-											<li>Features bananas + Rinus plus Ronnie</li>
+											<li>A wide variaty of music</li>
+											<li>Fast searching for albums, artists ánd tracks</li>
+											<li>Detailed artist-pages with related artists and upcoming events</li>
+											<li>Recommends artists and events based on your listening-behaviour</li>
+											<li>Fully integrated with spotify</li>
 										</ul>
 									</section>
 
@@ -207,17 +206,36 @@ $spotify = MetaTune::getInstance();
 										</header>
 										<ul class="quote-list">
 											<li>
-												<img src="images/patty.png" alt="" />
-												<p>"Wow, now <u>that</u> is what I call awesomeeee"</p>
-												<span>Patty, DJ</span>
+												<img src="images/obama.jpg" alt="" />
+												<p>"Oh yes, they can!"</p>
+												<span>Barack Obama, President</span>
 											</li>
 											<li>
-												<img src="images/nobodycares.jpg" alt="" />
-												<p>"Houdoe!"</p>
+												<img src="images/skrillex.jpg" alt="" />
+												<p>"WOBWOBBWOBOWBOWB wopwopwop WOBWOBWOB"</p>
+												<span>Skrillex, Dubstep Producer</span>
+											</li>
+											<li>
+												<img src="images/floris.jpg" alt="" />
+												<p>"Hoe hedde ge da gedoan?"</p>
 												<span>Floris Verburg, Brabander</span>
 											</li>
-											<li>
-												<img src="images/rinus.jpg" alt="" />
+										</ul>
+									</section>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- Copyright -->
+			<div id="copyright">
+				&copy; djpatty. 
+			</div>
+
+	</body>
+</html><img src="images/rinus.jpg" alt="" />
 												<p>"Eet veel bananen, bananen zijn gezond!"</p>
 												<span>Rinus, Zanger</span>
 											</li>

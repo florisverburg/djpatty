@@ -24,7 +24,7 @@ if(isset($_REQUEST['success'])){
 
 <html>
 	<head>
-		<title>Halcyonic: A Responsive HTML5 Site Template by HTML5 Up! (One Column)</title>
+		<title>Music by djpatty&trade; - Register</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -32,6 +32,22 @@ if(isset($_REQUEST['success'])){
 		<script src="css/5grid/jquery.js"></script>
 		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarHeight=55&amp;mobileUI.openerWidth=75&amp;mobileUI.openerText=&lt;"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+		<script>
+			function validateForm()
+			{
+			var x=document.forms["register"]["username"].value;
+			var y=document.forms["register"]["password"].value;
+			if (x==null || x.split(' ').join('')=="")
+			  {
+			  alert("Enter a username");
+			  return false;
+			  }
+			  if(y==null || y.split(' ').join('')==""){
+				alert("Enter a password");
+				return false;
+			}
+			}
+		</script>
 	</head>
 	<body class="subpage">
 	
@@ -77,7 +93,7 @@ if(isset($_REQUEST['success'])){
 										<div class="content">
 											<div class="form">
 												<center>
-													<form method="post" action="adduser.php">
+													<form name="register" method="post" action="adduser.php" onsubmit="return validateForm()">
 														<h2>Register</h2>
 														<input id="input-username" name="username" type="text" placeholder="Email">
 														<br /><input id="input-password" name="password" type="password" placeholder="Password">

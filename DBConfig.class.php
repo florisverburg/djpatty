@@ -4,7 +4,7 @@ class DBConfig {
 
 	const HOST_NAME = "mysql04.totaalholding.nl";
 	const USER_NAME = "patric1q_test";
-	const PASSWORD  = "test1";
+	const PASSWORD  = "projectv1.0";
 	const DB_NAME 	= "patric1q_test";
 
 	public static function getHostName(){
@@ -21,5 +21,7 @@ class DBConfig {
 
 	public static function getDatabaseName(){
 		return self::DB_NAME;
+	}
+}f::DB_NAME;
 	}
 }
