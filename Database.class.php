@@ -158,8 +158,3 @@ class Database {
 		return mysql_query($query);
 	}
 }
-		
-		// There is a Unique constraint on the username, so the query will return false if that username is already taken.
-		return mysql_query($query);
-	}
-}

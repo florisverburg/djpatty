@@ -128,14 +128,4 @@ if(isset($_SESSION['username']) && isset($_SESSION['password'])){
 			</div>
 
 	</body>
-</html>/div>
-				</div>
-			</div>
-
-		<!-- Copyright -->
-			<div id="copyright">
-				&copy; djpatty.
-			</div>
-
-	</body>
 </html>

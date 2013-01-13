@@ -22,6 +22,4 @@ class DBConfig {
 	public static function getDatabaseName(){
 		return self::DB_NAME;
 	}
-}f::DB_NAME;
-	}
 }

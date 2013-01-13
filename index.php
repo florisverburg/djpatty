@@ -235,23 +235,4 @@ $spotify = MetaTune::getInstance();
 			</div>
 
 	</body>
-</html><img src="images/rinus.jpg" alt="" />
-												<p>"Eet veel bananen, bananen zijn gezond!"</p>
-												<span>Rinus, Zanger</span>
-											</li>
-										</ul>
-									</section>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		<!-- Copyright -->
-			<div id="copyright">
-				&copy; djpatty. 
-			</div>
-
-	</body>
 </html>

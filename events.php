@@ -188,19 +188,3 @@
 
 	</body>
 </html>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		<!-- Footer -->
-
-		<!-- Copyright -->
-			<div id="copyright">
-				&copy; djpatty.
-			</div>
-
-	</body>
-</html>

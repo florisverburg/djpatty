@@ -191,18 +191,3 @@
 
 	</body>
 </html>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-		<!-- Copyright -->
-			<div id="copyright">
-				&copy; djpatty. All rights reserved.
-			</div>
-
-	</body>
-</html>
